@@ -18,8 +18,10 @@ public class SugarInBloodFragment extends Fragment implements View.OnClickListen
     private static final String TAG = "myLogs";
     public final static String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.SugarInBloodFragment";
 
-    float valueSugarInBlood = 4.4f;
-    EditText etSugarInBlood;
+    private float valueSugarInBlood = 4.4f;
+    private EditText etSugarInBlood;
+    private Button btnMinus;
+    private Button btnPlus;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
@@ -29,8 +31,8 @@ public class SugarInBloodFragment extends Fragment implements View.OnClickListen
         String sugarInBlood = Float.toString(valueSugarInBlood);
         etSugarInBlood.setText(sugarInBlood);
 
-        Button btnMinus = view.findViewById(R.id.btnMinus);
-        Button btnPlus = view.findViewById(R.id.btnPlus);
+        btnMinus = view.findViewById(R.id.btnMinus);
+        btnPlus = view.findViewById(R.id.btnPlus);
         Button btnFurther = view.findViewById(R.id.btnFurther);
         btnFurther.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,27 +66,37 @@ public class SugarInBloodFragment extends Fragment implements View.OnClickListen
         switch (v.getId()){
             case R.id.btnMinus:
                 Log.d(TAG, "click btnMinus");
-                valueSugarInBlood = decrementSugarInBlood(valueSugarInBlood);
-                etSugarInBlood.setText(String.valueOf(roundDown(valueSugarInBlood,1)));
+                if (valueSugarInBlood < 0.1f) {
+                    btnPlus.setEnabled(true);
+                    valueSugarInBlood = decrement(valueSugarInBlood);
+                    etSugarInBlood.setText(String.valueOf(roundDown(valueSugarInBlood,1)));
+                } else {
+                    btnMinus.setEnabled(false);
+                }
                 break;
             case R.id.btnPlus:
                 Log.d(TAG, "click btnPlus");
-                //valueSugarInBlood = valueSugarInBlood + 0.1f;
-                valueSugarInBlood = incrimentSugarInBlood(valueSugarInBlood);
-                etSugarInBlood.setText(String.valueOf(roundUp(valueSugarInBlood, 1)));
+                if (valueSugarInBlood < 4.9f) {
+                    btnMinus.setEnabled(true);
+                    valueSugarInBlood = increment(valueSugarInBlood);
+                    etSugarInBlood.setText(String.valueOf(roundUp(valueSugarInBlood, 1)));
+
+                } else {
+                    btnPlus.setEnabled(false);
+                }
                 break;
         }
     }
-    public float decrementSugarInBlood(float f){
+    public static float decrement(float f){
         return f - 0.1f;
     }
-    public float incrimentSugarInBlood(float f){
+    public static float increment(float f){
         return f + 0.1f;
     }
-    public BigDecimal roundDown(float value, int digits){
+    public static BigDecimal roundDown(float value, int digits){
         return new BigDecimal(""+value).setScale(digits, BigDecimal.ROUND_HALF_DOWN);
     }
-    public BigDecimal roundUp(float value, int digits){
+    public static BigDecimal roundUp(float value, int digits){
         return new BigDecimal(""+value).setScale(digits, BigDecimal.ROUND_HALF_UP);
     }
 }

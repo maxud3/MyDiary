@@ -8,11 +8,9 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
-
+import androidx.constraintlayout.widget.Group;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 public class InsulinFragment extends Fragment implements CompoundButton.OnCheckedChangeListener,
@@ -22,37 +20,43 @@ public class InsulinFragment extends Fragment implements CompoundButton.OnChecke
 
     private static final String TAG = "myLogs";
 
-    Button btnShortInsulin;//TODO сделать отдельный фрагмент для Long Insulin
-    Button btnLongInsulin;
     private Button btnPlusShortInsulin;
     private Button btnMinusShortInsulin;
     private Button btnPlusLongInsulin;
     private Button btnMinusLongInsulin;
-    private TextView textViewShortInsulin;
-    private EditText editTextShortInsulin;
-    private EditText editTextLongInsulin;
-    private String shortInsulin = "2.0";
-    //Switch switchLongInsulin;
+    private EditText etShortInsulin;
+    private EditText etLongInsulin;
+    private float shortInsulin = 2.0f;
+    private float longInsulin = 1.0f;
+    private Group groupLongInsulin;
+    private Group groupShortInsulin;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_insulin, container, false);
-        //btnShortInsulin = view.findViewById(R.id.btnShortInsulin);
-        //btnLongInsulin = view.findViewById(R.id.btnLongInsulin);
+
+        etShortInsulin = view.findViewById(R.id.editTextShortInsulin);
         btnPlusShortInsulin = view.findViewById(R.id.btnPlusShortInsulin);
         btnMinusShortInsulin = view.findViewById(R.id.btnMinusShortInsulin);
-        textViewShortInsulin = view.findViewById(R.id.textViewShortInsulin);
-        editTextShortInsulin = view.findViewById(R.id.editTextShortInsulin);
-        editTextLongInsulin = view.findViewById(R.id.editTextLongInsulin);
+        btnPlusShortInsulin.setOnClickListener(this);
+        btnMinusShortInsulin.setOnClickListener(this);
+        String stShortInsulin = Float.toString(shortInsulin);
+        etShortInsulin.setText(stShortInsulin);
+
+        etLongInsulin = view.findViewById(R.id.editTextLongInsulin);
         btnPlusLongInsulin = view.findViewById(R.id.btnPlusLongInsulin);
         btnMinusLongInsulin = view.findViewById(R.id.btnMinusLongInsulin);
+        btnPlusLongInsulin.setOnClickListener(this);
+        btnMinusLongInsulin.setOnClickListener(this);
+        String stLongInsulin = Float.toString(longInsulin);
+        etLongInsulin.setText(stLongInsulin);
 
-        editTextShortInsulin.setText(shortInsulin);
 
-        /*btnShortInsulin.setOnClickListener(this);
-        btnLongInsulin.setOnClickListener(this);*/
+        groupLongInsulin = view.findViewById(R.id.groupLongInsulin);
+        groupShortInsulin = view.findViewById(R.id.groupShortInsulin);
+
         Switch switchLongInsulin = view.findViewById(R.id.switchLongInsulin);
         if (switchLongInsulin != null){
             switchLongInsulin.setOnCheckedChangeListener(this);
@@ -63,21 +67,11 @@ public class InsulinFragment extends Fragment implements CompoundButton.OnChecke
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
-            btnMinusLongInsulin.setVisibility(View.VISIBLE);
-            btnPlusLongInsulin.setVisibility(View.VISIBLE);
-            editTextLongInsulin.setVisibility(View.VISIBLE);
-            textViewShortInsulin.setVisibility(View.GONE);
-            editTextShortInsulin.setVisibility(View.GONE);
-            btnMinusShortInsulin.setVisibility(View.GONE);
-            btnPlusShortInsulin.setVisibility(View.GONE);
+            groupShortInsulin.setVisibility(View.GONE);
+            groupLongInsulin.setVisibility(View.VISIBLE);
         } else {
-            btnMinusLongInsulin.setVisibility(View.INVISIBLE);
-            btnPlusLongInsulin.setVisibility(View.INVISIBLE);
-            editTextLongInsulin.setVisibility(View.INVISIBLE);
-            textViewShortInsulin.setVisibility(View.VISIBLE);
-            editTextShortInsulin.setVisibility(View.VISIBLE);
-            btnMinusShortInsulin.setVisibility(View.VISIBLE);
-            btnPlusShortInsulin.setVisibility(View.VISIBLE);
+            groupShortInsulin.setVisibility(View.VISIBLE);
+            groupLongInsulin.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -85,22 +79,45 @@ public class InsulinFragment extends Fragment implements CompoundButton.OnChecke
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnMinusShortInsulin:
-
+                if (shortInsulin > 1.5f) {
+                    btnPlusShortInsulin.setEnabled(true);
+                    shortInsulin = SugarInBloodFragment.decrement(shortInsulin);
+                    etShortInsulin.setText(String.valueOf(SugarInBloodFragment
+                            .roundDown(shortInsulin, 1)));
+                } else {
+                    btnMinusShortInsulin.setEnabled(false);
+                }
+                break;
+            case R.id.btnPlusShortInsulin:
+                if (shortInsulin < 2.4f) {
+                    btnMinusShortInsulin.setEnabled(true);
+                    shortInsulin = SugarInBloodFragment.increment(shortInsulin);
+                    etShortInsulin.setText(String.valueOf(SugarInBloodFragment
+                            .roundUp(shortInsulin, 1)));
+                } else {
+                    btnPlusShortInsulin.setEnabled(false);
+                }
+                break;
+            case R.id.btnMinusLongInsulin:
+                if (longInsulin > 0.5f) {
+                    btnPlusLongInsulin.setEnabled(true);
+                    longInsulin = SugarInBloodFragment.decrement(longInsulin);
+                    etLongInsulin.setText(String.valueOf(SugarInBloodFragment
+                            .roundDown(longInsulin, 1)));
+                } else {
+                    btnMinusLongInsulin.setEnabled(false);
+                }
+                break;
+            case R.id.btnPlusLongInsulin:
+                if (longInsulin < 1.4f) {
+                    btnMinusLongInsulin.setEnabled(true);
+                    longInsulin = SugarInBloodFragment.increment(longInsulin);
+                    etLongInsulin.setText(String.valueOf(SugarInBloodFragment
+                            .roundUp(longInsulin, 1)));
+                } else {
+                    btnPlusLongInsulin.setEnabled(false);
+                }
+                break;
         }
     }
-
-   /* @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnLongInsulin:
-                btnLongInsulin.setBackgroundResource(R.color.btn);
-                btnShortInsulin.setBackgroundResource(R.color.inactive_button);
-                btnPlusShortInsulin.setEnabled(false);
-                btnMinusShortInsulin.setEnabled(false);
-                break;
-            case R.id.btnShortInsulin:
-                btnShortInsulin.setBackgroundResource(R.color.btn);
-                btnLongInsulin.setBackgroundResource(R.color.inactive_button);
-        }
-    }*/
 }

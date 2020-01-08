@@ -14,13 +14,13 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
         .OnSugarInBloodFragmentListener, MenuFragment.OpenInsulinFragment {
 
     private static final String TAG = "myLogs";
-    private FrameLayout container;
+    //private FrameLayout container;
     private FragmentManager fm;
-    private Toolbar toolbar;
+    //private Toolbar toolbar;
 
     @Override
     public void onSugarInBloodFragmentListener() {
-        FragmentManager fm = getSupportFragmentManager();
+        fm = getSupportFragmentManager();
 
 
         Fragment fragment = fm.findFragmentById(R.id.container);
@@ -37,7 +37,7 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
     }
     @Override
     public void openInsulinFragment() {
-        FragmentManager fm = getSupportFragmentManager();
+        fm = getSupportFragmentManager();
 
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment instanceof MenuFragment){
@@ -56,13 +56,13 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        container = findViewById(R.id.container);
+        //container = findViewById(R.id.container);
         fm = getSupportFragmentManager();
 
         Fragment fragment = fm.findFragmentById(R.id.container);
