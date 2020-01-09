@@ -23,5 +23,24 @@
         <item name="android:background">@color/btn</item>
         <item name="android:text">@string/further</item>
     </style>
-
+    <style name="line">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:background">@color/line</item>
+    </style>
+    <style name="viewClick">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+    <style name="imageViewChevron">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:src">@drawable/ic_chevron_right_black_24dp</item>
+        <item name="android:contentDescription">@string/chevron_right</item>
+    </style>
 </resources>

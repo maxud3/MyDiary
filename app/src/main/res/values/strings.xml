@@ -34,4 +34,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="general_data">Общие данные</string>
+    <string name="coefficients">Коэффициенты</string>
+    <string name="chevron_right">стрелка в право</string>
+    <string name="not_set">не заданы</string>
+    <string name="сompensation">Компенсация</string>
+    <string name="compensation_off">Выкл</string>
+    <string name="active_insulin">Активный инсулин</string>
+    <string name="insulin_calculation">Расчет инсулина</string>
+    <string name="information">информация</string>
+    <string name="daily_dose_insulin">Суточная доза инсулина</string>
+    <string name="unit">ед.</string>
+    <string name="carbohidrates_in_bread_unit">Углеводов в 1 ХЕ</string>
+    <string name="gramm">г.</string>
+    <string name="morning_coefficient">Утренний коэффициент</string>
 </resources>

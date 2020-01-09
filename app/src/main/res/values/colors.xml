@@ -7,5 +7,6 @@
     <color name="textView">#757575</color>
     <color name="inactive_button">#E0E0E0</color>
     <color name="cancel">#FF5252</color>
+    <color name="line">#BDBDBD</color>
 
 </resources>
