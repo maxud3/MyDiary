@@ -37,6 +37,7 @@
     <string name="coefficients">Коэффициенты</string>
     <string name="chevron_right">стрелка в право</string>
     <string name="not_set">не заданы</string>
+    <string name="set">заданы</string>
     <string name="сompensation">Компенсация</string>
     <string name="compensation_off">Выкл</string>
     <string name="active_insulin">Активный инсулин</string>
@@ -47,4 +48,8 @@
     <string name="carbohidrates_in_bread_unit">Углеводов в 1 ХЕ</string>
     <string name="gramm">г.</string>
     <string name="morning_coefficient">Утренний коэффициент</string>
+    <string name="day_coefficient">Дневной коэффициент</string>
+    <string name="evening_coefficient">Вечерний коэффициент</string>
+    <string name="night_coefficient">Ночной коэффициент</string>
+    <string name="indicate_coefficient">Укажите коэффициент! Иначе расчет дозы инсулина будет невозможен.</string>
 </resources>

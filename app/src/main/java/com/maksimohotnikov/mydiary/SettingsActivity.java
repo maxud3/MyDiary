@@ -3,6 +3,7 @@ package com.maksimohotnikov.mydiary;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -70,5 +71,21 @@ public class SettingsActivity extends AppCompatActivity implements
     public void openInfoFragment() {
         Toast toast = Toast.makeText(this, "click on imageViewInfo", Toast.LENGTH_LONG);
         toast.show();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if (id == android.R.id.home){
+            onBackPressed();
+        }
+        return true;
+    }
+    public void onBackPressed(){
+        //FragmentManager fm = getSupportFragmentManager();
+        if (fm.getBackStackEntryCount() > 1){
+            fm.popBackStack();
+        }else {
+            finish();
+        }
     }
 }

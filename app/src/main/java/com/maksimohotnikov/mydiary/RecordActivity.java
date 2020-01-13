@@ -8,12 +8,14 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
+
+import static com.maksimohotnikov.mydiary.MainActivity.TAG;
+
 
 public class RecordActivity extends AppCompatActivity implements SugarInBloodFragment
         .OnSugarInBloodFragmentListener, MenuFragment.OpenInsulinFragment {
 
-    private static final String TAG = "myLogs";
+
     //private FrameLayout container;
     private FragmentManager fm;
     //private Toolbar toolbar;

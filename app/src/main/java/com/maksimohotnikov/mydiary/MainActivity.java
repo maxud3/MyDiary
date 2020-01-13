@@ -18,7 +18,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "myLogs";
+    public static final String TAG = "myLogs";
 
     Calendar date = Calendar.getInstance();
     TextView currentDateTime;
