@@ -13,12 +13,39 @@ import static com.maksimohotnikov.mydiary.MainActivity.TAG;
 
 
 public class RecordActivity extends AppCompatActivity implements SugarInBloodFragment
-        .OnSugarInBloodFragmentListener, MenuFragment.OpenInsulinFragment {
+        .OnSugarInBloodFragmentListener, MenuFragment.OpenInsulinFragment,
+        ShortInsulinFragment.OnShortInsulinFragmentListener{
 
 
     //private FrameLayout container;
     private FragmentManager fm;
     //private Toolbar toolbar;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_record);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        //container = findViewById(R.id.container);
+        fm = getSupportFragmentManager();
+
+        Fragment fragment = fm.findFragmentById(R.id.container);
+        if (fragment == null){
+            fragment = new SugarInBloodFragment();
+            fm.beginTransaction()
+                    .add(R.id.container, fragment, SugarInBloodFragment.TAG_FRAGMENT)
+                    .addToBackStack(SugarInBloodFragment.TAG_FRAGMENT)
+                    .commit();
+        }
+        Log.d(TAG, "onCreate().RecordActivity");
+    }
 
     @Override
     public void onSugarInBloodFragmentListener() {
@@ -44,38 +71,36 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment instanceof MenuFragment){
             Fragment fragmentReplace;
-            fragmentReplace = new InsulinFragment();
+            fragmentReplace = new ShortInsulinFragment();
 
             fm.beginTransaction()
-                    .replace(R.id.container, fragmentReplace, InsulinFragment.TAG_FRAGMENT)
+                    .replace(R.id.container, fragmentReplace, ShortInsulinFragment.TAG_FRAGMENT)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .addToBackStack(InsulinFragment.TAG_FRAGMENT)
+                    .addToBackStack(ShortInsulinFragment.TAG_FRAGMENT)
                     .commit();
         }
     }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_record);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        //container = findViewById(R.id.container);
+    public void openLongInsulinFragment() {
         fm = getSupportFragmentManager();
 
         Fragment fragment = fm.findFragmentById(R.id.container);
-        if (fragment == null){
-            fragment = new SugarInBloodFragment();
+        if (fragment instanceof ShortInsulinFragment){
+            Fragment fragmentReplace;
+            fragmentReplace = new LongInsulinFragment();
+
             fm.beginTransaction()
-                    .add(R.id.container, fragment, SugarInBloodFragment.TAG_FRAGMENT)
-                    .addToBackStack(SugarInBloodFragment.TAG_FRAGMENT)
+                    .replace(R.id.container, fragmentReplace, LongInsulinFragment.TAG_FRAGMENT)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .addToBackStack(LongInsulinFragment.TAG_FRAGMENT)
                     .commit();
         }
-        Log.d(TAG, "onCreate().RecordActivity");
+    }
+
+    @Override
+    public void openTotalRecordFragment() {
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -129,4 +154,7 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
         super.onDestroy();
         Log.i(TAG, "onDestroy().RecordActivity");
     }
+
+
+
 }

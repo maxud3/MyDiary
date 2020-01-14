@@ -19,7 +19,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     public final static String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.MenuFragment";
 
     private static final String TAG = "myLogs";
-
+    private OpenInsulinFragment mListener;
     //private Button btnBreadUnits;
     private Button btnMinusBreadUnits;
     private Button btnPlusBreadUnits;
@@ -82,7 +82,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     public interface OpenInsulinFragment{
         void openInsulinFragment();
     }
-    private OpenInsulinFragment mListener;
+
     @Override
     public void onAttach(Context context){
         super.onAttach(context);

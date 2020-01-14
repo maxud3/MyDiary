@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LongInsulinFragment">
+
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/TextViewFragmentStyle"
+        android:layout_width="0dp"
+        android:text="@string/long_insulin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/attentionInsulin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/attention_insulin"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <Button
+        android:id="@+id/btnMinusLongInsulin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:background="@color/btn"
+        android:text="@string/btnMinus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/attentionInsulin" />
+
+    <EditText
+        android:id="@+id/etLongInsulin"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="54dp"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:labelFor="@id/etLongInsulin"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlusLongInsulin"
+        app:layout_constraintStart_toEndOf="@+id/btnMinusLongInsulin"
+        app:layout_constraintTop_toBottomOf="@+id/attentionInsulin" />
+
+    <Button
+        android:id="@+id/btnPlusLongInsulin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:background="@color/btn"
+        android:text="@string/btnPlus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/attentionInsulin" />
+    <Button
+        android:id="@+id/btnFurther"
+        style="@style/ButtonFurther"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

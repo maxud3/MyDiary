@@ -66,7 +66,7 @@ public class SugarInBloodFragment extends Fragment implements View.OnClickListen
         switch (v.getId()){
             case R.id.btnMinus:
                 Log.d(TAG, "click btnMinus");
-                if (valueSugarInBlood < 0.1f) {
+                if (valueSugarInBlood > 0.1f) {
                     btnPlus.setEnabled(true);
                     valueSugarInBlood = decrement(valueSugarInBlood);
                     etSugarInBlood.setText(String.valueOf(roundDown(valueSugarInBlood,1)));
