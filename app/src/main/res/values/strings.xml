@@ -13,6 +13,13 @@
     <string name="sugar_in_blood">Уровень сахара в крови</string>
     <string name="further">далее</string>
     <string name="hypoglycemia">гипогликемия</string>
+    <string name="severe_hypoglycemia">тяжелая гипогликемия</string>
+    <string name="mild_hyperglycemia">легкая гипергликемия</string>
+    <string name="hyperglycemia">гипергликемия</string>
+    <string name="severe_hyperglycemia">тяжелая гипергликемия</string>
+    <string name="attention_precoma">Внимание! Прекома! Срочно обратитесь к врачу!</string>
+    <string name="attention_coma">Внимание! Такой показатель соответствует гипергликемической коме!
+        Срочно обратитесь к врачу!</string>
     <string name="tools_sugar_in_blood">0.00</string>
     <string name="btnMinus">-</string>
     <string name="btnPlus">+</string>
@@ -20,7 +27,7 @@
     <string name="menu">Меню</string>
     <string name="insulin">Инсулин</string>
     <string name="short_insulin">Короткий инсулин</string>
-    <string name="attention_insulin">Это расчетное значение! Проверти перед инекцией.</string>
+    <string name="attention_insulin">Это расчетное значение! Проверти перед инъекцией.</string>
     <string name="long_insulin">Длинный инсулин</string>
     <string name="zero_zero">0.0</string>
     <string name="value_short_insulin">1.5</string>

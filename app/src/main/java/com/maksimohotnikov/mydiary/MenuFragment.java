@@ -38,8 +38,8 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
         textViewBreadUnits = view.findViewById(R.id.textViewBreadUnits);
         editTextBreadUnits = view.findViewById(R.id.editTextBreadUnits);
-
         btnFurther = view.findViewById(R.id.btnFurther);
+
         btnFurther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

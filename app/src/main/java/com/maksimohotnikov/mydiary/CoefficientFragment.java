@@ -31,6 +31,8 @@ public class CoefficientFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mSettings = getActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         Log.d(TAG, "CoefficientFragment. onCreate");
     }
 
@@ -41,7 +43,7 @@ public class CoefficientFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_coefficient, container, false);
         getActivity().setTitle(R.string.coefficients);
 
-        mSettings = getActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
 
         etMorningCoefficient = view.findViewById(R.id.etMorningCoefficient);
         etDayCoefficient = view.findViewById(R.id.etDayCoefficient);
