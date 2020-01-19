@@ -37,14 +37,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editTextSugarInBlood"
-        android:layout_width="wrap_content"
+        android:id="@+id/etSugarInBlood"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        android:labelFor="@+id/editTextSugarInBlood"
+        android:labelFor="@+id/etSugarInBlood"
         android:text=""
+        android:textAlignment="center"
         android:textSize="44sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -59,7 +60,7 @@
         android:layout_marginTop="82dp"
         android:text="@string/btnMinus"
         android:textSize="30sp"
-        app:layout_constraintEnd_toStartOf="@+id/editTextSugarInBlood"
+        app:layout_constraintEnd_toStartOf="@+id/etSugarInBlood"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewWarning" />
 
@@ -71,7 +72,7 @@
         android:text="@string/btnPlus"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextSugarInBlood"
+        app:layout_constraintStart_toEndOf="@+id/etSugarInBlood"
         app:layout_constraintTop_toBottomOf="@+id/textViewWarning" />
 
     <TextView
@@ -84,7 +85,7 @@
         android:textColor="@color/textView"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSugarInBlood" />
+        app:layout_constraintTop_toBottomOf="@+id/etSugarInBlood" />
 
     <Switch
         android:id="@+id/switchNoMeasuring"

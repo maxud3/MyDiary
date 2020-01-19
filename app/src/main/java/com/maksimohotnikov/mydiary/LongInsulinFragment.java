@@ -1,26 +1,25 @@
 package com.maksimohotnikov.mydiary;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import static com.maksimohotnikov.mydiary.SugarInBloodFragment.*;
 
-public class LongInsulinFragment extends Fragment implements View.OnClickListener {
+public class LongInsulinFragment extends Fragment implements View.OnClickListener{
 
     public final static String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.LongInsulinFragment";
 
-    private Button btnPlusLongInsulin;
-    private Button btnMinusLongInsulin;
-    private EditText etLongInsulin;
-    private float longInsulin = 2.0f;
-    //private OnFragmentInteractionListener mListener;
+    @BindView(R.id.btnPlusLongInsulin) Button btnPlusLongInsulin;
+    @BindView(R.id.btnMinusLongInsulin) Button btnMinusLongInsulin;
+    @BindView(R.id.etLongInsulin) EditText etLongInsulin;
+    private Unbinder unbinder;
 
     public LongInsulinFragment() {
         // Required empty public constructor
@@ -36,16 +35,13 @@ public class LongInsulinFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_long_insulin, container, false);
+        unbinder =  ButterKnife.bind(this, view);
 
-        btnMinusLongInsulin = view.findViewById(R.id.btnMinusLongInsulin);
-        btnPlusLongInsulin = view.findViewById(R.id.btnPlusLongInsulin);
-        etLongInsulin = view.findViewById(R.id.etLongInsulin);
-
-        String stLongInsulin = Float.toString(longInsulin);
-        etLongInsulin.setText(stLongInsulin);
+        etLongInsulin.setText("2.0");
 
         btnMinusLongInsulin.setOnClickListener(this);
         btnPlusLongInsulin.setOnClickListener(this);
+
         return view;
     }
 
@@ -53,25 +49,31 @@ public class LongInsulinFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnMinusLongInsulin:
-                if (longInsulin > 1.5f) {
-                    btnPlusLongInsulin.setEnabled(true);
-                    longInsulin = SugarInBloodFragment.decrement(longInsulin);
-                    etLongInsulin.setText(String.valueOf(SugarInBloodFragment
-                            .roundDown(longInsulin, 1)));
-                } else {
-                    btnMinusLongInsulin.setEnabled(false);
-                }
+                decrementLongInsulin();
                 break;
             case R.id.btnPlusLongInsulin:
-                if (longInsulin < 2.4f) {
-                    btnMinusLongInsulin.setEnabled(true);
-                    longInsulin = SugarInBloodFragment.increment(longInsulin);
-                    etLongInsulin.setText(String.valueOf(SugarInBloodFragment
-                            .roundUp(longInsulin, 1)));
-                } else {
-                    btnPlusLongInsulin.setEnabled(false);
-                }
+                incrementLongInsulin();
                 break;
+        }
+    }
+
+    private void decrementLongInsulin(){
+        float longInsulin = Float.valueOf(etLongInsulin.getText().toString());
+        if (longInsulin > 0.0f){
+            longInsulin = decrement(longInsulin);
+            etLongInsulin.setText(String.valueOf(roundUp(longInsulin, 1)));
+        }else {
+            btnMinusLongInsulin.setEnabled(false);
+        }
+    }
+
+    private void incrementLongInsulin(){
+        float longInsulin = Float.valueOf(etLongInsulin.getText().toString());
+        if (longInsulin <50.0f){
+            longInsulin = increment(longInsulin);
+            etLongInsulin.setText(String.valueOf(roundUp(longInsulin, 1)));
+        }else {
+            btnPlusLongInsulin.setEnabled(false);
         }
     }
 
@@ -86,6 +88,11 @@ public class LongInsulinFragment extends Fragment implements View.OnClickListene
         }
     }*/
 
+   @Override
+   public void onDestroy(){
+       super.onDestroy();
+       unbinder.unbind();
+   }
     @Override
     public void onDetach() {
         super.onDetach();

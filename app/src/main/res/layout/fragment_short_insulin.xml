@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
-        android:id="@+id/btnMinusLongInsulin"
+        android:id="@+id/btnMinusShortInsulin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -39,21 +39,21 @@
         app:layout_constraintTop_toBottomOf="@+id/attentionInsulin" />
 
     <EditText
-        android:id="@+id/etLongInsulin"
+        android:id="@+id/etShortInsulin"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="54dp"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        android:labelFor="@id/etLongInsulin"
+        android:labelFor="@id/etShortInsulin"
         android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintEnd_toStartOf="@+id/btnPlusLongInsulin"
-        app:layout_constraintStart_toEndOf="@+id/btnMinusLongInsulin"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlusShortInsulin"
+        app:layout_constraintStart_toEndOf="@+id/btnMinusShortInsulin"
         app:layout_constraintTop_toBottomOf="@+id/attentionInsulin" />
 
     <Button
-        android:id="@+id/btnPlusLongInsulin"
+        android:id="@+id/btnPlusShortInsulin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -80,7 +80,7 @@
         android:text="@string/long_insulin"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLongInsulin" />
+        app:layout_constraintTop_toBottomOf="@+id/etShortInsulin" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -94,12 +94,12 @@
         app:layout_constraintTop_toTopOf="@+id/textView20" />
 
     <View
-        android:id="@+id/viewLongInsulin"
+        android:id="@+id/viewClickShortInsulin"
         style="@style/viewClick"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLongInsulin" />
+        app:layout_constraintTop_toBottomOf="@+id/etShortInsulin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

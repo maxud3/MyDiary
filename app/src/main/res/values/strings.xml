@@ -20,7 +20,7 @@
     <string name="attention_precoma">Внимание! Прекома! Срочно обратитесь к врачу!</string>
     <string name="attention_coma">Внимание! Такой показатель соответствует гипергликемической коме!
         Срочно обратитесь к врачу!</string>
-    <string name="tools_sugar_in_blood">0.00</string>
+    <string name="tools_sugar_in_blood">0.0</string>
     <string name="btnMinus">-</string>
     <string name="btnPlus">+</string>
     <string name="no_measuring">Измерение не проводилось</string>

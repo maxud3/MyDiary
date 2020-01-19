@@ -16,11 +16,7 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
         .OnSugarInBloodFragmentListener, MenuFragment.OpenInsulinFragment,
         ShortInsulinFragment.OnShortInsulinFragmentListener{
 
-
-    //private FrameLayout container;
     private FragmentManager fm;
-    //private Toolbar toolbar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +29,6 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        //container = findViewById(R.id.container);
         fm = getSupportFragmentManager();
 
         Fragment fragment = fm.findFragmentById(R.id.container);
@@ -51,7 +46,6 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
     public void onSugarInBloodFragmentListener() {
         fm = getSupportFragmentManager();
 
-
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment instanceof SugarInBloodFragment){
             Fragment fragmentReplace;
@@ -65,13 +59,17 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
         }
     }
     @Override
-    public void openInsulinFragment() {
+    public void openInsulinFragment(String string) {
         fm = getSupportFragmentManager();
 
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment instanceof MenuFragment){
             Fragment fragmentReplace;
             fragmentReplace = new ShortInsulinFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putString(ShortInsulinFragment.BREADUNITS, string);
+            fragmentReplace.setArguments(bundle);
 
             fm.beginTransaction()
                     .replace(R.id.container, fragmentReplace, ShortInsulinFragment.TAG_FRAGMENT)

@@ -12,49 +12,41 @@ import androidx.constraintlayout.widget.Group;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import static com.maksimohotnikov.mydiary.SugarInBloodFragment.*;
 
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
     public final static String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.MenuFragment";
-
     private static final String TAG = "myLogs";
     private OpenInsulinFragment mListener;
-    //private Button btnBreadUnits;
-    private Button btnMinusBreadUnits;
-    private Button btnPlusBreadUnits;
-    private Button btnFurther;
-    private Button btnCancel;
-    private Button btnOK;
-    private TextView textViewBreadUnits;
-    private EditText editTextBreadUnits;
-    private Group group;
+
+    @BindView(R.id.btnBreadUnits) Button btnBreadUnits;
+    @BindView(R.id.btnMinusBreadUnits) Button btnMinusBreadUnits;
+    @BindView(R.id.btnPlusBreadUnits) Button btnPlusBreadUnits;
+    @BindView(R.id.btnFurther) Button btnFurther;
+    @BindView(R.id.btnCancel) Button btnCancel;
+    @BindView(R.id.btnOK) Button btnOK;
+    @BindView(R.id.tvBreadUnits) TextView tvBreadUnits;
+    @BindView(R.id.etBreadUnits) EditText etBreadUnits;
+    @BindView(R.id.groupBreadUnits) Group group;
+    private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
+        unbinder = ButterKnife.bind(this, view);
 
-        textViewBreadUnits = view.findViewById(R.id.textViewBreadUnits);
-        editTextBreadUnits = view.findViewById(R.id.editTextBreadUnits);
-        btnFurther = view.findViewById(R.id.btnFurther);
-
-        btnFurther.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.openInsulinFragment();
-            }
-        });
-
-        group = view.findViewById(R.id.groupBreadUnits);
-        Button btnBreadUnits = view.findViewById(R.id.btnBreadUnits);
-        btnMinusBreadUnits = view.findViewById(R.id.btnMinusBreadUnits);
-        btnPlusBreadUnits = view.findViewById(R.id.btnPlusBreadUnits);
-        btnCancel = view.findViewById(R.id.btnCancel);
-        btnOK = view.findViewById(R.id.btnOK);
-
+        etBreadUnits.setText("1.0");
         btnBreadUnits.setOnClickListener(this);
+        btnMinusBreadUnits.setOnClickListener(this);
+        btnPlusBreadUnits.setOnClickListener(this);
+        btnFurther.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
         btnOK.setOnClickListener(this);
 
@@ -75,12 +67,46 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
             case R.id.btnOK:
                 btnFurther.setVisibility(View.VISIBLE);
                 group.setVisibility(View.GONE);
-                textViewBreadUnits.setText(editTextBreadUnits.getText().toString());
+                tvBreadUnits.setText(etBreadUnits.getText().toString());
                 break;
+            case R.id.btnMinusBreadUnits:
+                decrementBreadUnits();
+                break;
+            case R.id.btnPlusBreadUnits:
+                incrementBreadUnits();
+                break;
+            case R.id.btnFurther:
+                String breadUnits = tvBreadUnits.getText().toString();
+                if (breadUnits.equals("")) {
+                    breadUnits = "0";
+                }
+                mListener.openInsulinFragment(breadUnits);
+        }
+    }
+
+    private void decrementBreadUnits (){
+        float breadUnits = Float.valueOf(etBreadUnits.getText().toString());
+        if (breadUnits > 0.0f){
+            breadUnits = decrement(breadUnits);
+            etBreadUnits.setText(String
+                    .valueOf(roundUp(breadUnits, 1)));
+        }else {
+            btnMinusBreadUnits.setEnabled(false);
+        }
+    }
+
+    private void incrementBreadUnits(){
+        float breadUnits = Float.valueOf(etBreadUnits.getText().toString());
+        if (breadUnits < 50.0f){
+            breadUnits = increment(breadUnits);
+            etBreadUnits.setText(String
+                    .valueOf(roundUp(breadUnits, 1)));
+        }else {
+            btnPlusBreadUnits.setEnabled(false);
         }
     }
     public interface OpenInsulinFragment{
-        void openInsulinFragment();
+        void openInsulinFragment(String string);
     }
 
     @Override
@@ -92,5 +118,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
             throw  new RuntimeException(context.toString()
                     + "must implement OnFragment1DataListener");
         }
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        unbinder.unbind();
     }
 }
