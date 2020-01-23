@@ -11,21 +11,29 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 import static com.maksimohotnikov.mydiary.MainActivity.TAG;
 
 public class CoefficientFragment extends Fragment {
 
-    public static final  String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.CoefficientFragment";
-    public static final String APP_PREFERENCES = "mysettings";
-    public static final String MORNING_COEFFICIENT = "morningCoefficient";
-    public static final String DAY_COEFFICIENT = "dayCoefficient";
-    public static final String EVENING_COEFFICIENT = "eveningCoefficient";
-    public static final String NIGHT_COEFFICIENT = "nightCoefficient";
+    static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.CoefficientFragment";
+    static final String APP_PREFERENCES = "mysettings";
+    static final String MORNING_COEFFICIENT = "morningCoefficient";
+    static final String DAY_COEFFICIENT = "dayCoefficient";
+    static final String EVENING_COEFFICIENT = "eveningCoefficient";
+    static final String NIGHT_COEFFICIENT = "nightCoefficient";
     private SharedPreferences mSettings;
-    private EditText etMorningCoefficient;
-    private EditText etDayCoefficient;
-    private EditText etEveningCoefficient;
-    private EditText etNightCoefficient;
+    @BindView(R.id.etMorningCoefficient) EditText etMorningCoefficient;
+    @BindView(R.id.etDayCoefficient) EditText etDayCoefficient;
+    @BindView(R.id.etEveningCoefficient) EditText etEveningCoefficient;
+    @BindView(R.id.etNightCoefficient) EditText etNightCoefficient;
+    @BindString(R.string.default_coefficient) String default_coefficient;
+    Unbinder unbinder;
+
 
 
     @Override
@@ -33,6 +41,8 @@ public class CoefficientFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mSettings = getActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        //SharedPreferences.Editor prefEditor = mSettings.edit();
+        //prefEditor.clear();
         Log.d(TAG, "CoefficientFragment. onCreate");
     }
 
@@ -41,74 +51,57 @@ public class CoefficientFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_coefficient, container, false);
+        unbinder = ButterKnife.bind(this, view);
         getActivity().setTitle(R.string.coefficients);
 
-
-
-        etMorningCoefficient = view.findViewById(R.id.etMorningCoefficient);
-        etDayCoefficient = view.findViewById(R.id.etDayCoefficient);
-        etEveningCoefficient = view.findViewById(R.id.etEveningCoefficient);
-        etNightCoefficient = view.findViewById(R.id.etNightCoefficient);
+        onSetCoefficient();
         Log.d(TAG, "CoefficientFragment. onCreateView");
     return view;
     }
 
     private void onSaveCoefficients(){
-        onSaveMorningCoefficient();
-        onSaveDayCoefficient();
-        onSaveEveningCoefficient();
-        onSaveNightCoefficient();
+        SharedPreferences.Editor prefEditor = mSettings.edit();
+        prefEditor.putString(MORNING_COEFFICIENT, morningCoefficient());
+        prefEditor.putString(DAY_COEFFICIENT, dayCoefficient());
+        prefEditor.putString(EVENING_COEFFICIENT, eveningCoefficient());
+        prefEditor.putString(NIGHT_COEFFICIENT, nightCoefficient());
+        prefEditor.apply();
+
     }
-    private void onSaveMorningCoefficient(){
+    private String morningCoefficient(){
         String morningCoefficient = etMorningCoefficient.getText().toString();
-        SharedPreferences.Editor prefEditor = mSettings.edit();
-        prefEditor.putString(MORNING_COEFFICIENT, morningCoefficient);
-        prefEditor.apply();
-        Toast toast = Toast.makeText(getActivity(), "onClick saveMorningCoefficient()", Toast.LENGTH_LONG);
-        toast.show();
+        if (morningCoefficient.equals("")) {
+            morningCoefficient = default_coefficient;
+        }
+        return morningCoefficient;
     }
 
-    private void onSaveDayCoefficient(){
+    private String dayCoefficient(){
         String dayCoefficient = etDayCoefficient.getText().toString();
-        SharedPreferences.Editor prefEditor = mSettings.edit();
-        prefEditor.putString(DAY_COEFFICIENT, dayCoefficient);
-        prefEditor.apply();
+        if (dayCoefficient.equals("")){
+            dayCoefficient = default_coefficient;
+        }
+        return dayCoefficient;
     }
-    private void onSaveEveningCoefficient(){
+    private String eveningCoefficient(){
         String eveningCoefficient = etEveningCoefficient.getText().toString();
-        SharedPreferences.Editor prefEditor = mSettings.edit();
-        prefEditor.putString(EVENING_COEFFICIENT, eveningCoefficient);
-        prefEditor.apply();
+        if (eveningCoefficient.equals("")){
+            eveningCoefficient = default_coefficient;
+        }
+        return eveningCoefficient;
     }
-    private void onSaveNightCoefficient(){
+    private String nightCoefficient(){
         String nightCoefficient = etNightCoefficient.getText().toString();
-        SharedPreferences.Editor prefEditor = mSettings.edit();
-        prefEditor.putString(NIGHT_COEFFICIENT, nightCoefficient);
-        prefEditor.apply();
+        if (nightCoefficient.equals("")){
+            nightCoefficient = default_coefficient;
+        }
+        return nightCoefficient;
     }
-    private void onSetCoefficient(){
-        onSetMorningCoefficient();
-        onSetDayCoefficient();
-        onSetEveningCoefficient();
-        onSetNightCoefficient();
-    }
-    private void onSetMorningCoefficient(){
-        String st = mSettings.getString(MORNING_COEFFICIENT, "");
-        etMorningCoefficient.setText(st);
-    }
-
-    private void onSetDayCoefficient(){
-        String st = mSettings.getString(DAY_COEFFICIENT, "");
-        etDayCoefficient.setText(st);
-    }
-
-    private void onSetEveningCoefficient(){
-        String st = mSettings.getString(EVENING_COEFFICIENT, "");
-        etEveningCoefficient.setText(st);
-    }
-    private void onSetNightCoefficient(){
-        String st = mSettings.getString(NIGHT_COEFFICIENT, "");
-        etNightCoefficient.setText(st);
+    private void onSetCoefficient() {
+        etMorningCoefficient.setText(mSettings.getString(MORNING_COEFFICIENT, ""));
+        etDayCoefficient.setText(mSettings.getString(DAY_COEFFICIENT, ""));
+        etEveningCoefficient.setText(mSettings.getString(EVENING_COEFFICIENT, ""));
+        etNightCoefficient.setText(mSettings.getString(NIGHT_COEFFICIENT, ""));
     }
     @Override
     public void onAttach(Context context) {
@@ -129,7 +122,7 @@ public class CoefficientFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        onSetCoefficient();
+
         Log.d(TAG, "CoefficientFragment. onResume");
     }
     @Override
@@ -151,6 +144,7 @@ public class CoefficientFragment extends Fragment {
     @Override
     public void onDestroy(){
         super.onDestroy();
+        unbinder.unbind();
         Log.d(TAG, "CoefficientFragment. onDestroy");
     }
 

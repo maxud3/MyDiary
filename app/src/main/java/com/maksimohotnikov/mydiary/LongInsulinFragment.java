@@ -60,6 +60,7 @@ public class LongInsulinFragment extends Fragment implements View.OnClickListene
     private void decrementLongInsulin(){
         float longInsulin = Float.valueOf(etLongInsulin.getText().toString());
         if (longInsulin > 0.0f){
+            btnPlusLongInsulin.setEnabled(true);
             longInsulin = decrement(longInsulin);
             etLongInsulin.setText(String.valueOf(roundUp(longInsulin, 1)));
         }else {
@@ -70,6 +71,7 @@ public class LongInsulinFragment extends Fragment implements View.OnClickListene
     private void incrementLongInsulin(){
         float longInsulin = Float.valueOf(etLongInsulin.getText().toString());
         if (longInsulin <50.0f){
+            btnMinusLongInsulin.setEnabled(true);
             longInsulin = increment(longInsulin);
             etLongInsulin.setText(String.valueOf(roundUp(longInsulin, 1)));
         }else {

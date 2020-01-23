@@ -61,6 +61,7 @@ public class SugarInBloodFragment extends Fragment implements View.OnClickListen
     private void decrementSugarInBlood(){
         float sugarInBlood = Float.valueOf(etSugarInBlood.getText().toString());
         if (sugarInBlood > 0.0f){
+            btnPlus.setEnabled(true);
             sugarInBlood = decrement(sugarInBlood);
             etSugarInBlood.setText(String.valueOf(roundUp(sugarInBlood, 1)));
         }else {
@@ -71,6 +72,7 @@ public class SugarInBloodFragment extends Fragment implements View.OnClickListen
     private void incrementSugarInBlood(){
         float sugarInBlood = Float.valueOf(etSugarInBlood.getText().toString());
         if (sugarInBlood < 34.0f){
+            btnMinus.setEnabled(true);
             sugarInBlood = increment(sugarInBlood);
             etSugarInBlood.setText(String.valueOf(roundUp(sugarInBlood,1)));
         }else {

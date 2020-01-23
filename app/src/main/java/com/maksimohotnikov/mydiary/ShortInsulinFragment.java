@@ -4,19 +4,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
-
 import net.danlew.android.joda.JodaTimeAndroid;
-
 import org.joda.time.LocalTime;
-
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -73,7 +71,16 @@ public class ShortInsulinFragment extends Fragment implements View.OnClickListen
     }
 
     private float insulinEat (float breadUnits, float currentCoefficient){
-       return breadUnits * currentCoefficient;
+        float defaultCoefficient = 0.00f;
+        if (currentCoefficient > defaultCoefficient) {
+            return breadUnits * currentCoefficient;
+        } else {
+            Toast toast = Toast.makeText(
+                    getActivity(), R.string.dose_not_calculated, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            return defaultCoefficient;
+        }
     }
     private void selectCoefficient(){
 
@@ -129,6 +136,7 @@ public class ShortInsulinFragment extends Fragment implements View.OnClickListen
     private void decrementShortInsulin(){
         float shortInsulin = Float.valueOf(etShortInsulin.getText().toString());
         if (shortInsulin >0.0f){
+            btnPlusShortInsulin.setEnabled(true);
             shortInsulin = decrement(shortInsulin);
             etShortInsulin.setText(String.valueOf(roundUp(shortInsulin, 1)));
         }else {
@@ -138,7 +146,8 @@ public class ShortInsulinFragment extends Fragment implements View.OnClickListen
 
     private void incrementShortInsulin(){
         float shortInsulin = Float.valueOf(etShortInsulin.getText().toString());
-        if (shortInsulin <50.0f){
+        if (shortInsulin <1.0f){
+            btnMinusShortInsulin.setEnabled(true);
             shortInsulin = increment(shortInsulin);
             etShortInsulin.setText(String.valueOf(roundUp(shortInsulin, 1)));
         }else {

@@ -58,5 +58,40 @@
     <string name="day_coefficient">Дневной коэффициент</string>
     <string name="evening_coefficient">Вечерний коэффициент</string>
     <string name="night_coefficient">Ночной коэффициент</string>
-    <string name="indicate_coefficient">Укажите коэффициент! Иначе расчет дозы инсулина будет невозможен.</string>
+    <string name="indicate_coefficient">Укажите коэффициент! Иначе расчет дозы инсулина будет
+        невозможен.</string>
+    <string name="selected">Выбрано</string>
+    <string name="night_interval">(23:00 – 06:00)</string>
+    <string name="evening_interval">(18:00 – 23:00)</string>
+    <string name="day_interval">(12:00 - 17:00)</string>
+    <string name="morning_interval">(06:00 - 11:00)</string>
+    <string name="coefficient_saved">Коэффициенты сохранены!</string>
+    <string name="default_coefficient">0.00</string>
+    <string name="dose_not_calculated">Доза инсулина не расчитана! Не указан коэффициент.</string>
+    <string name="compensation_insulin">Компенсационный инсулин</string>
+    <string name="target_glucose">Целевая глюкоза</string>
+    <string name="hint_target_glucose">5.0</string>
+    <string name="bottom_line">Нижняя граница</string>
+    <string name="hint_bottom_line">4.4</string>
+    <string name="top_line">Верхняя граница</string>
+    <string name="hint_top_line">5.5</string>
+    <string name="sensitivity_coefficient">Коэф. чувствительности</string>
+    <string name="description_compensation_insulin">Компенсационный инсулин - это доза, нужная для
+        корректировки высокого или низкого сахара в крови.
+При расчете инъекции разница измеренной и целевой глюкозы делится на коэффициент чувствительности.
+Полученное значение прибавляется ( либо вычитается в случае низкого сахара в крови) к дозе на
+        усвоение съеденных углеводов.\n
+В случае, если вы отключите компенсационный инсулин, при расчёте дозы он не станет учитываться.\n
+Уровень целевого инсулина зависит от множества условий и индивидуальности организма и поэтому он
+        должен назначаться врачом.\n
+Нижняя и верхняя граница определяют диапазон глюкозы в крови, для которого компенсационный инсулин
+        не учитывается.
+Уровень целевой глюкозы при этом должен находиться в указанном диапазоне.\n
+Коэффициент чувствительности зависит от типа применяемого инсулина и рассчитывается  исходя из
+        СДИ(суточной дозы инсулина).
+Для ультракороткого инсулина  он равен 100/СДИ. А для короткого инсулина - 83/СДИ.\n
+Icomp = (G - 5.0) / 3.03\n
+G - измеренный сахара в крови.\n
+5.0 - целевая глюкоза.\n
+3.03 - коэффициент чувствительности.</string>
 </resources>

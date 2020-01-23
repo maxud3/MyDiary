@@ -57,6 +57,18 @@ public class SettingsActivity extends AppCompatActivity implements
 
     @Override
     public void openCompensationFragment() {
+        Fragment fragment = fm.findFragmentById(R.id.container);
+        if (fragment instanceof SettingsFragment){
+            Fragment fragmentReplace;
+            fragmentReplace = new CompensationFragment();
+
+            fm.beginTransaction()
+                    .replace(R.id.container, fragmentReplace,CompensationFragment.TAG_FRAGMENT)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .addToBackStack(CompensationFragment.TAG_FRAGMENT)
+                    .commit();
+
+        }
         Toast toast = Toast.makeText(this, "click on viewCompensation", Toast.LENGTH_LONG);
         toast.show();
     }

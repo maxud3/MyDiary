@@ -12,6 +12,8 @@ import androidx.constraintlayout.widget.Group;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -33,6 +35,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.tvBreadUnits) TextView tvBreadUnits;
     @BindView(R.id.etBreadUnits) EditText etBreadUnits;
     @BindView(R.id.groupBreadUnits) Group group;
+    @BindView(R.id.groupSelectedBreadUnits) Group groupSelectedBreadUnits;
     private Unbinder unbinder;
 
     @Nullable
@@ -67,6 +70,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
             case R.id.btnOK:
                 btnFurther.setVisibility(View.VISIBLE);
                 group.setVisibility(View.GONE);
+                groupSelectedBreadUnits.setVisibility(View.VISIBLE);
                 tvBreadUnits.setText(etBreadUnits.getText().toString());
                 break;
             case R.id.btnMinusBreadUnits:
@@ -87,6 +91,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     private void decrementBreadUnits (){
         float breadUnits = Float.valueOf(etBreadUnits.getText().toString());
         if (breadUnits > 0.0f){
+            btnPlusBreadUnits.setEnabled(true);
             breadUnits = decrement(breadUnits);
             etBreadUnits.setText(String
                     .valueOf(roundUp(breadUnits, 1)));
@@ -98,6 +103,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     private void incrementBreadUnits(){
         float breadUnits = Float.valueOf(etBreadUnits.getText().toString());
         if (breadUnits < 50.0f){
+            btnMinusBreadUnits.setEnabled(true);
             breadUnits = increment(breadUnits);
             etBreadUnits.setText(String
                     .valueOf(roundUp(breadUnits, 1)));

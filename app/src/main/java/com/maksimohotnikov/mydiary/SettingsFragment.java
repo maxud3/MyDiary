@@ -16,21 +16,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.maksimohotnikov.mydiary.CoefficientFragment.APP_PREFERENCES;
-import static com.maksimohotnikov.mydiary.CoefficientFragment.DAY_COEFFICIENT;
-import static com.maksimohotnikov.mydiary.CoefficientFragment.EVENING_COEFFICIENT;
-import static com.maksimohotnikov.mydiary.CoefficientFragment.MORNING_COEFFICIENT;
-import static com.maksimohotnikov.mydiary.CoefficientFragment.NIGHT_COEFFICIENT;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+import static com.maksimohotnikov.mydiary.CoefficientFragment.*;
 import static com.maksimohotnikov.mydiary.MainActivity.TAG;
 
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 
-    public final static String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.SettingsFragment";
-
+    static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.SettingsFragment";
+    private OnFragmentInteractionListener mListener;
     private SharedPreferences mSettings;
-
-    //private View viewCoefficients;
+    @BindView(R.id.viewCoefficients) View viewCoefficients;
+    @BindView(R.id.viewCompensation) View viewCompensation;
+    @BindView(R.id.viewActiveInsulin) View viewActiveInsulin;
+    @BindView(R.id.iwInfo) ImageView iwInfo;
+    @BindView(R.id.tvCoefficients) TextView tvCoefficients;
+    private Unbinder unbinder;
 
     public SettingsFragment() {
 
@@ -41,39 +45,32 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         Log.d(TAG, "SettingsFragment. onCreate");
-
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        unbinder = ButterKnife.bind(this, view);
         getActivity().setTitle(R.string.settings);
         mSettings = getActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-
-        View viewCoefficients = view.findViewById(R.id.viewCoefficients);
-        View viewCompensation = view.findViewById(R.id.viewCompensation);
-        View viewActiveInsulin = view.findViewById(R.id.viewActiveInsulin);
-        ImageView iwInfo = view.findViewById(R.id.iwInfo);
 
         viewCoefficients.setOnClickListener(this);
         viewCompensation.setOnClickListener(this);
         viewActiveInsulin.setOnClickListener(this);
         iwInfo.setOnClickListener(this);
 
-        //onCoefficient();
-
         Log.d(TAG, "SettingsFragment. onCreateView");
         return view;
     }
-    private void onCoefficient(){
-        TextView tvCoefficients = getView().findViewById(R.id.tvCoefficients);
+    private void setCoefficient(){
+
         String morningCoefficient = mSettings.getString(MORNING_COEFFICIENT, "");
         String dayCoefficient = mSettings.getString(DAY_COEFFICIENT, "");
         String eveningCoefficient = mSettings.getString(EVENING_COEFFICIENT, "");
         String nightCoefficient = mSettings.getString(NIGHT_COEFFICIENT, "");
-        if (morningCoefficient.equals("") || dayCoefficient.equals("")
-            || eveningCoefficient.equals("") || nightCoefficient.equals("")){
+        if (morningCoefficient.equals("0.00") || dayCoefficient.equals("0.00")
+            || eveningCoefficient.equals("0.00") || nightCoefficient.equals("0.00")){
             tvCoefficients.setText(R.string.not_set);
             tvCoefficients.setTextColor(Color.RED);
             Toast toast = Toast.makeText(
@@ -82,6 +79,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             toast.show();
         }else {
             tvCoefficients.setText(R.string.set);
+            Toast toast = Toast.makeText(
+                    getActivity(), R.string.coefficient_saved, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
         }
     }
 
@@ -108,7 +109,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         void openActiveInsulinFragment();
         void openInfoFragment();
     }
-    private OnFragmentInteractionListener mListener;
+
 
     @Override
     public void onAttach(Context context) {
@@ -135,7 +136,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume(){
         super.onResume();
-        onCoefficient();
+        setCoefficient();
         Log.d(TAG, "SettingsFragment. onResume");
     }
     @Override
@@ -156,6 +157,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy(){
         super.onDestroy();
+        unbinder.unbind();
         Log.d(TAG, "SettingsFragment. onDestroy");
     }
 

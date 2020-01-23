@@ -162,4 +162,32 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btnOK"
         app:layout_constraintStart_toEndOf="@+id/etBreadUnits" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/selected"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvBreadUnits"
+        app:layout_constraintTop_toBottomOf="@+id/btnFindAddProduct" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/bread_units"
+        app:layout_constraintBottom_toBottomOf="@+id/tvBreadUnits"
+        app:layout_constraintStart_toEndOf="@+id/tvBreadUnits"
+        app:layout_constraintTop_toTopOf="@+id/tvBreadUnits" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupSelectedBreadUnits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="textView19,textView21" />
 </androidx.constraintlayout.widget.ConstraintLayout>
