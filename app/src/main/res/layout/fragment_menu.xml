@@ -4,19 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue3"
     android:orientation="vertical">
+
+    <View
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
-        style="@style/TextViewFragmentStyle"
+        style="@style/text_view_h1"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:text="@string/menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnFurther"
+        android:id="@+id/btn_further"
         style="@style/ButtonFurther"
         android:layout_width="0dp"
         android:visibility="visible"
@@ -25,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnFindAddProduct"
+        android:id="@+id/btn_find_add_product"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -46,7 +58,7 @@
         app:layout_constraintGuide_percent="0.75" />
 
     <Button
-        android:id="@+id/btnBreadUnits"
+        android:id="@+id/btn_bread_units"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -55,36 +67,38 @@
         android:background="@color/btn"
         android:text="@string/bread_units"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnFindAddProduct"
+        app:layout_constraintStart_toEndOf="@+id/btn_find_add_product"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/tvBreadUnits"
+        android:id="@+id/tv_bread_units"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFindAddProduct" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_find_add_product" />
 
     <EditText
-        android:id="@+id/etBreadUnits"
-        android:layout_width="wrap_content"
+        android:id="@+id/et_bread_units"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        android:labelFor="@id/etBreadUnits"
+        android:labelFor="@id/et_bread_units"
         android:text="@string/zero_zero"
         android:textSize="30sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btnCancel"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnCancel"
+        android:id="@+id/btn_cancel"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -93,13 +107,13 @@
         android:background="@color/cancel"
         android:text="@string/cancel"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btnFurther"
+        app:layout_constraintBottom_toTopOf="@+id/btn_further"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnOK"
+        android:id="@+id/btn_ok"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="1dp"
@@ -108,7 +122,7 @@
         android:background="@color/btn"
         android:text="@string/ok"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btnFurther"
+        app:layout_constraintBottom_toTopOf="@+id/btn_further"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
@@ -120,74 +134,72 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <Button
-        android:id="@+id/btnMinusBreadUnits"
+        android:id="@+id/btn_minus_bread_units"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/btnMinus"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btnCancel"
-        app:layout_constraintEnd_toStartOf="@+id/etBreadUnits"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cancel"
+        app:layout_constraintEnd_toStartOf="@+id/et_bread_units"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnPlusBreadUnits"
+        android:id="@+id/btn_plus_bread_units"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/btnPlus"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btnOK"
+        app:layout_constraintBottom_toTopOf="@+id/btn_ok"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etBreadUnits" />
+        app:layout_constraintStart_toEndOf="@+id/et_bread_units" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/groupBreadUnits"
+        android:id="@+id/group_bread_units"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:visibility="gone"
-        app:constraint_referenced_ids="btnOK,btnCancel,etBreadUnits,btnMinusBreadUnits,btnPlusBreadUnits,textView5"
-        app:layout_constraintBottom_toTopOf="@+id/btnFurther"
+        android:visibility="visible"
+        app:constraint_referenced_ids="btn_ok,btn_cancel,et_bread_units,btn_minus_bread_units,btn_plus_bread_units,textView5"
+        app:layout_constraintBottom_toTopOf="@+id/btn_further"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
+        style="@style/text_view_h2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="24dp"
         android:text="@string/bread_units"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnOK"
-        app:layout_constraintStart_toEndOf="@+id/etBreadUnits" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_bread_units"
+        app:layout_constraintStart_toEndOf="@+id/et_bread_units" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_selected_bread_units"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="textView19,textView21" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/selected"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/tvBreadUnits"
-        app:layout_constraintTop_toBottomOf="@+id/btnFindAddProduct" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_bread_units"
+        app:layout_constraintEnd_toStartOf="@+id/tv_bread_units" />
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:text="@string/bread_units"
-        app:layout_constraintBottom_toBottomOf="@+id/tvBreadUnits"
-        app:layout_constraintStart_toEndOf="@+id/tvBreadUnits"
-        app:layout_constraintTop_toTopOf="@+id/tvBreadUnits" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/groupSelectedBreadUnits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="textView19,textView21" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_bread_units"
+        app:layout_constraintStart_toEndOf="@+id/tv_bread_units" />
 </androidx.constraintlayout.widget.ConstraintLayout>

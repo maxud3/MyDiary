@@ -14,10 +14,12 @@ import static com.maksimohotnikov.mydiary.MainActivity.TAG;
 
 public class RecordActivity extends AppCompatActivity implements SugarInBloodFragment
         .OnSugarInBloodFragmentListener, MenuFragment.OpenInsulinFragment,
-        ShortInsulinFragment.OnShortInsulinFragmentListener{
+        ShortInsulinFragment.OnShortInsulinFragmentListener,
+        LongInsulinFragment.OnLongInsulinFragmentListener{
 
     private FragmentManager fm;
 
+    @SuppressWarnings ("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,7 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
         }
     }
     @Override
-    public void openInsulinFragment(String string) {
+    public void openInsulinFragment() {
         fm = getSupportFragmentManager();
 
         Fragment fragment = fm.findFragmentById(R.id.container);
@@ -67,9 +69,9 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
             Fragment fragmentReplace;
             fragmentReplace = new ShortInsulinFragment();
 
-            Bundle bundle = new Bundle();
-            bundle.putString(ShortInsulinFragment.BREADUNITS, string);
-            fragmentReplace.setArguments(bundle);
+            /*Bundle bundle = new Bundle();
+            bundle.putString(ShortInsulinFragment.BREAD_UNITS, string);
+            fragmentReplace.setArguments(bundle);*/
 
             fm.beginTransaction()
                     .replace(R.id.container, fragmentReplace, ShortInsulinFragment.TAG_FRAGMENT)
@@ -98,8 +100,21 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
 
     @Override
     public void openTotalRecordFragment() {
+        fm = getSupportFragmentManager();
 
+        Fragment fragment = fm.findFragmentById(R.id.container);
+        if (fragment instanceof ShortInsulinFragment || fragment instanceof LongInsulinFragment){
+            Fragment fragmentReplace;
+            fragmentReplace = new TotalRecordFragment();
+
+            fm.beginTransaction()
+                    .replace(R.id.container, fragmentReplace,TotalRecordFragment.TAG_FRAGMENT)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .addToBackStack(TotalRecordFragment.TAG_FRAGMENT)
+                    .commit();
+        }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();

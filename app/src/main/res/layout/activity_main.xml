@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/actionbar_gradient"
+    android:background="@color/blue3"
     tools:context=".MainActivity">
-<!--id для include должен совпадать с id toolbar.xml -->
+    <!--id для include должен совпадать с id toolbar.xml -->
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
@@ -80,11 +79,11 @@
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
     <Button
-        android:id="@+id/btnAddRecopd"
+        android:id="@+id/btnAddRecord"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
-        android:background="@drawable/actionbar_gradient"
+        android:background="@color/blue3"
         android:text="@string/btn_add_record"
         app:layout_constraintBottom_toTopOf="@+id/btnSettings"
         app:layout_constraintEnd_toEndOf="parent"

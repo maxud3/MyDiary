@@ -1,9 +1,6 @@
 package com.maksimohotnikov.mydiary;
 
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.text.format.DateUtils;
 import android.app.DatePickerDialog;
@@ -12,46 +9,35 @@ import android.view.Menu;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
+//import android.widget.DatePicker;
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
-
-import net.danlew.android.joda.JodaTimeAndroid;
-
-import org.joda.time.LocalTime;
-
 import java.util.Calendar;
 
-import butterknife.BindString;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "myLogs";
 
     Calendar date = Calendar.getInstance();
-    TextView currentDateTime;
-    Button btnAddRecord;
-    Button btnSettings;
+    @BindView (R.id.currentDateTime) TextView currentDateTime;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    private Unbinder unbinder;
+
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate().MainActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        unbinder = ButterKnife.bind(this);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.diary_actionbar_title);
-
-        currentDateTime = findViewById(R.id.currentDateTime);
-        btnAddRecord = findViewById(R.id.btnAddRecopd);
-        btnSettings = findViewById(R.id.btnSettings);
-
-        currentDateTime.setOnClickListener(this);
-        btnAddRecord.setOnClickListener(this);
-        btnSettings.setOnClickListener(this);
 
         setInitialDateTime();
     }
@@ -71,13 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // установка обработчика выбора даты
-    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            date.set(Calendar.YEAR, year);
-            date.set(Calendar.MONTH, monthOfYear);
-            date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            setInitialDateTime();
-        }
+    DatePickerDialog.OnDateSetListener d = (view, year, monthOfYear, dayOfMonth) -> {
+        date.set(Calendar.YEAR, year);
+        date.set(Calendar.MONTH, monthOfYear);
+        date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        setInitialDateTime();
     };
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -92,21 +76,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.help:
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
+    @OnClick({R.id.btnAddRecord, R.id.btnSettings, R.id.currentDateTime})
+    public void onClick(View view) {
+        switch (view.getId()){
             case R.id.currentDateTime:
                 Log.d(TAG, "currentDateTime");
                 setData();
                 break;
-            case R.id.btnAddRecopd:
+            case R.id.btnAddRecord:
                 Intent intent = new Intent(MainActivity.this, RecordActivity.class);
                 startActivity(intent);
+                Log.d(TAG, "btnAddRecord");
                 break;
             case R.id.btnSettings:
                 Intent intent1 = new Intent(MainActivity.this, SettingsActivity.class);
@@ -148,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unbinder.unbind();
         Log.i(TAG, "onDestroy().MainActivity");
     }
 }

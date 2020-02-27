@@ -4,94 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue3"
     android:orientation="vertical"
     tools:context=".RecordActivity">
 
+    <View
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textView"
-        style="@style/TextViewFragmentStyle"
+        style="@style/text_view_h1"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:text="@string/sugar_in_blood"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnFurther"
-        android:layout_width="0dp"
+        android:id="@+id/btn_further"
         style="@style/ButtonFurther"
+        android:layout_width="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textViewWarning"
+        android:id="@+id/tv_warning"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/hypoglycemia"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@color/red500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/etSugarInBlood"
-        android:layout_width="80dp"
+        android:id="@+id/et_sugar_in_blood"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="82dp"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        android:labelFor="@+id/etSugarInBlood"
-        android:text=""
+        android:labelFor="@+id/et_sugar_in_blood"
         android:textAlignment="center"
         android:textSize="44sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWarning"
-        tools:text="@string/tools_sugar_in_blood" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_warning"
+        tools:text="@string/default_sugar_in_blood" />
 
     <Button
-        android:id="@+id/btnMinus"
+        android:id="@+id/btn_minus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="82dp"
         android:text="@string/btnMinus"
         android:textSize="30sp"
-        app:layout_constraintEnd_toStartOf="@+id/etSugarInBlood"
+        app:layout_constraintEnd_toStartOf="@+id/et_sugar_in_blood"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWarning" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_warning" />
 
     <Button
-        android:id="@+id/btnPlus"
+        android:id="@+id/btn_plus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="82dp"
         android:text="@string/btnPlus"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etSugarInBlood"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWarning" />
+        app:layout_constraintStart_toEndOf="@+id/et_sugar_in_blood"
+        app:layout_constraintTop_toBottomOf="@+id/tv_warning" />
 
     <TextView
         android:id="@+id/textView3"
+        style="@style/text_view_h2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
         android:text="@string/no_measuring"
-        android:textColor="@color/textView"
-        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSugarInBlood" />
+        app:layout_constraintTop_toBottomOf="@+id/et_sugar_in_blood" />
 
     <Switch
-        android:id="@+id/switchNoMeasuring"
+        android:id="@+id/switch_no_measuring"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/grou_sugar_in_blood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="et_sugar_in_blood,btn_minus,btn_plus" />
 </androidx.constraintlayout.widget.ConstraintLayout>

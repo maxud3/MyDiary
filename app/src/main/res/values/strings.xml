@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Дневник \n
         диабета</string>
+    <!--MainActivity -->
     <string name="settings">Настройки</string>
     <string name="help">Справка</string>
-    <string name="date">03 февраля 2019</string>
     <string name="records">Запись</string>
     <string name="btn_reminders">напоминания</string>
     <string name="btn_settings">настройки</string>
     <string name="btn_my_products">мои продукты</string>
     <string name="btn_add_record">добавить запись</string>
     <string name="diary_actionbar_title">Дневник</string>
+    <!--SugarInBloodFragment -->
     <string name="sugar_in_blood">Уровень сахара в крови</string>
     <string name="further">далее</string>
     <string name="hypoglycemia">гипогликемия</string>
@@ -20,54 +21,78 @@
     <string name="attention_precoma">Внимание! Прекома! Срочно обратитесь к врачу!</string>
     <string name="attention_coma">Внимание! Такой показатель соответствует гипергликемической коме!
         Срочно обратитесь к врачу!</string>
-    <string name="tools_sugar_in_blood">0.0</string>
+    <string name="default_sugar_in_blood">4.4</string>
     <string name="btnMinus">-</string>
     <string name="btnPlus">+</string>
     <string name="no_measuring">Измерение не проводилось</string>
+    <!-- MenuFragment-->
     <string name="menu">Меню</string>
-    <string name="insulin">Инсулин</string>
-    <string name="short_insulin">Короткий инсулин</string>
-    <string name="attention_insulin">Это расчетное значение! Проверти перед инъекцией.</string>
-    <string name="long_insulin">Длинный инсулин</string>
-    <string name="zero_zero">0.0</string>
-    <string name="value_short_insulin">1.5</string>
-    <string name="find_add_product">найти или добавить продукт</string>
     <string name="bread_units">ХЕ</string>
     <string name="cancel">отмена</string>
     <string name="ok">OK</string>
+    <string name="find_add_product">найти или добавить продукт</string>
+    <string name="default_bread_units">0.0</string>
+    <string name="selected_bread_units">Выбрано %s ХЕ</string>
+    <!--ShortInsulinFragment and LongInsulinFragment -->
+    <string name="insulin">Инсулин</string>
+    <string name="short_insulin">Короткий инсулин</string>
+    <string name="attention_insulin">Это расчетное значение! Проверти перед инъекцией.</string>
+    <string name="dose_not_calculated">Доза инсулина не расчитана! Не указан коэффициент.</string>
+    <string name="long_insulin">Длинный инсулин</string>
+    <string name="zero_zero">0.0</string>
+    <string name="value_short_insulin">1.5</string>
+
+
     <string name="back_arrow">назад</string>
-    <string name="save">Сохранить</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- SettingFragment-->
     <string name="general_data">Общие данные</string>
+    <string name="save">Сохранить</string>
     <string name="coefficients">Коэффициенты</string>
+    <string name="coefficients_saved">Коэффициенты сохранены</string>
     <string name="chevron_right">стрелка в право</string>
     <string name="not_set">не заданы</string>
     <string name="set">заданы</string>
-    <string name="сompensation">Компенсация</string>
-    <string name="compensation_off">Выкл</string>
+    <string name="compensation">Компенсация</string>
+    <string name="off">Выкл</string>
+    <string name="compensation_off">Компенсационный инсулин отключен</string>
+    <string name="parameters_saved">Параметры сохранены</string>
+    <string name="error_parameters_saved">Укажите все параметры или отключите эту функцию.</string>
     <string name="active_insulin">Активный инсулин</string>
     <string name="insulin_calculation">Расчет инсулина</string>
     <string name="information">информация</string>
     <string name="daily_dose_insulin">Суточная доза инсулина</string>
+    <string name="daily_dose_insulin_formula">СДИ - это сумма базального и прандиального инсулинов
+    за сутки.</string>
     <string name="unit">ед.</string>
-    <string name="carbohidrates_in_bread_unit">Углеводов в 1 ХЕ</string>
+    <string name="carbohydrates_in_bread_unit">Углеводов в 1 ХЕ</string>
+    <string name="hint_carbohydrates_in_bread_unit">Хлебная единица (ХЕ, углеводная единица) —
+        условная единица, разработанная немецкими диетологами, используется для приблизительной
+        оценки количества углеводов в продуктах: одна ХЕ равна 10 (без учёта пищевых волокон) или
+        12 граммам (с учётом балластных веществ) углеводов</string>
     <string name="gramm">г.</string>
+    <string name="indicate_coefficient">Укажите коэффициент! Иначе расчет дозы инсулина будет
+        невозможен.</string>
+    <string name="compensation_on">%s ммоль/л</string>
+    <string name="selected">Выбрано</string>
+    <string name="night_interval">(23:00 – 06:00)</string>
+    <string name="evening_interval">(18:00 – 23:00)</string>
+    <string name="day_interval">(12:00 – 17:00)</string>
+    <string name="morning_interval">(06:00 – 11:00)</string>
+    <string name="coefficient_saved">Коэффициенты сохранены!</string>
+    <string name="arrow_down">стрелка вниз</string>
+    <!-- CoefficientFragment-->
     <string name="morning_coefficient">Утренний коэффициент</string>
     <string name="day_coefficient">Дневной коэффициент</string>
     <string name="evening_coefficient">Вечерний коэффициент</string>
     <string name="night_coefficient">Ночной коэффициент</string>
-    <string name="indicate_coefficient">Укажите коэффициент! Иначе расчет дозы инсулина будет
-        невозможен.</string>
-    <string name="selected">Выбрано</string>
-    <string name="night_interval">(23:00 – 06:00)</string>
-    <string name="evening_interval">(18:00 – 23:00)</string>
-    <string name="day_interval">(12:00 - 17:00)</string>
-    <string name="morning_interval">(06:00 - 11:00)</string>
-    <string name="coefficient_saved">Коэффициенты сохранены!</string>
     <string name="default_coefficient">0.00</string>
-    <string name="dose_not_calculated">Доза инсулина не расчитана! Не указан коэффициент.</string>
+    <!--SettingsFragment -->
+
+    <!-- CompensationFragment-->
     <string name="compensation_insulin">Компенсационный инсулин</string>
     <string name="target_glucose">Целевая глюкоза</string>
     <string name="hint_target_glucose">5.0</string>
@@ -89,9 +114,16 @@
 Уровень целевой глюкозы при этом должен находиться в указанном диапазоне.\n
 Коэффициент чувствительности зависит от типа применяемого инсулина и рассчитывается  исходя из
         СДИ(суточной дозы инсулина).
-Для ультракороткого инсулина  он равен 100/СДИ. А для короткого инсулина - 83/СДИ.\n
-Icomp = (G - 5.0) / 3.03\n
-G - измеренный сахара в крови.\n
-5.0 - целевая глюкоза.\n
-3.03 - коэффициент чувствительности.</string>
+Для ультракороткого инсулина  он равен 100/СДИ. А для короткого инсулина - 83/СДИ.</string>
+    <string name="compensation_insulin_formula">Icomp = (G - %1$s) / %2$s\n
+    G - измеренный сахара в крови.\n
+    5.0 - целевая глюкоза.\n
+    3.03 - коэффициент чувствительности.</string>
+
+    <string name="mmol">ммоль/л</string>
+    <string name="arrow_up">стрелка вверх</string>
+    <string name="zero">0</string>
+    <string name="hint_dayli_dose_insulin">0</string>
+    <string name="hint_bread_units">12</string>
+
 </resources>

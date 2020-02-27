@@ -16,6 +16,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
     private FragmentManager fm;
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +31,10 @@ public class SettingsActivity extends AppCompatActivity implements
         fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment == null){
-            fragment = new SettingsFragment();
+            fragment = new MySettingFragment()/*SettingsFragment()*/;
             fm.beginTransaction()
-                    .add(R.id.container, fragment, SettingsFragment.TAG_FRAGMENT)
-                    .addToBackStack(SettingsFragment.TAG_FRAGMENT)
+                    .add(R.id.container, fragment, MySettingFragment/*SettingsFragment*/.TAG_FRAGMENT)
+                    .addToBackStack(MySettingFragment/*SettingsFragment*/.TAG_FRAGMENT)
                     .commit();
         }
     }

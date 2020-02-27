@@ -11,68 +11,101 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import net.danlew.android.joda.JodaTimeAndroid;
 import org.joda.time.LocalTime;
-import butterknife.BindString;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static com.maksimohotnikov.mydiary.CoefficientFragment.APP_PREFERENCES;
-import static com.maksimohotnikov.mydiary.CoefficientFragment.DAY_COEFFICIENT;
-import static com.maksimohotnikov.mydiary.CoefficientFragment.EVENING_COEFFICIENT;
-import static com.maksimohotnikov.mydiary.CoefficientFragment.MORNING_COEFFICIENT;
-import static com.maksimohotnikov.mydiary.CoefficientFragment.NIGHT_COEFFICIENT;
+//import static com.maksimohotnikov.mydiary.CoefficientFragment.APP_PREFERENCES;
+//import static com.maksimohotnikov.mydiary.CoefficientFragment.DAY_COEFFICIENT;
+//import static com.maksimohotnikov.mydiary.CoefficientFragment.EVENING_COEFFICIENT;
+//import static com.maksimohotnikov.mydiary.CoefficientFragment.MORNING_COEFFICIENT;
+//import static com.maksimohotnikov.mydiary.CoefficientFragment.NIGHT_COEFFICIENT;
+import static com.maksimohotnikov.mydiary.MenuFragment.BREAD_UNITS;
 import static com.maksimohotnikov.mydiary.MainActivity.TAG;
+import static com.maksimohotnikov.mydiary.MySettingFragment.*;
 import static com.maksimohotnikov.mydiary.SugarInBloodFragment.*;
 
 
-public class ShortInsulinFragment extends Fragment implements View.OnClickListener {
+public class ShortInsulinFragment extends Fragment {
 
-    public static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.ShortInsulinFragment";
-    public static final String BREADUNITS = "breadUnits";
+    static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.ShortInsulinFragment";
     private OnShortInsulinFragmentListener mListener;
-    private SharedPreferences mSettings;
-    @BindView(R.id.btnPlusShortInsulin) Button btnPlusShortInsulin;
-    @BindView(R.id.btnMinusShortInsulin) Button btnMinusShortInsulin;
-    @BindView(R.id.etShortInsulin) EditText etShortInsulin;
-    @BindView(R.id.viewClickShortInsulin) View viewClickShortInsulin;
+    @BindView(R.id.btn_plus_short_insulin) Button btnPlusShortInsulin;
+    @BindView(R.id.btn_minus_short_insulin) Button btnMinusShortInsulin;
+    @BindView(R.id.et_short_insulin) EditText etShortInsulin;
     private Unbinder unbinder;
     private float currentCoefficient;
-    private float insulinEat;
+    private float totalInsulin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mSettings = getActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        selectCoefficient();
-
-        float breadUnits = Float.valueOf(getArguments().getString(BREADUNITS));
-        insulinEat = insulinEat(breadUnits, currentCoefficient);
+        selectCurrentCoefficient();
 
         Log.d(TAG, "onCreate: ShortInsulinFragment");
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_short_insulin, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        etShortInsulin.setText(String.valueOf(roundUp(insulinEat, 1)));
-        btnMinusShortInsulin.setOnClickListener(this);
-        btnPlusShortInsulin.setOnClickListener(this);
-        viewClickShortInsulin.setOnClickListener(this);
+        //float insulinEat = calculateInsulinEat(currentCoefficient);
+        //float compensationInsulin =  calculateCompensationInsulin();
+        //calculateTotalInsulin(insulinEat, compensationInsulin);
+        calculateTotalInsulin();
+        setTotalInsulin(totalInsulin);
+
         Log.d(TAG, "onCreateView: ShortInsulinFragment");
         return view;
     }
 
-    private float insulinEat (float breadUnits, float currentCoefficient){
+    //устанавливаем итоговую дозу инсулина
+    private void setTotalInsulin(float totalInsulin){
+        if (totalInsulin < 0.0f){
+            etShortInsulin.setText(getString(R.string.zero_zero));
+        }else {
+            etShortInsulin.setText(String.valueOf(roundUp(totalInsulin, 1)));
+        }
+    }
+
+    //вычисляем итоговую дозу инсулина
+    @SuppressWarnings("ConstantConditions")
+    private void calculateTotalInsulin(/*float insulinEat, float compensationInsulin*/){
+        //totalInsulin = insulinEat + compensationInsulin;
+        SharedPreferences prefs = getActivity()
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        boolean switchNoMeasuringState = prefs.getBoolean(SWITCH_NO_MEASURING, false);
+        boolean switchCompensationInsulin = prefs.getBoolean(SWITCH_COMPENSATION_INSULIN, false);
+
+        if (switchNoMeasuringState || !switchCompensationInsulin){
+            totalInsulin = calculateInsulinEat(currentCoefficient);
+        }else {
+            float insulinEat = calculateInsulinEat(currentCoefficient);
+            float compensationInsulin =  calculateCompensationInsulin();
+            totalInsulin = insulinEat + compensationInsulin;
+        }
+    }
+
+    //Расчитываем инсулин на еду по коэффициенту на текущее время
+    @SuppressWarnings("ConstantConditions")
+    private float calculateInsulinEat (float currentCoefficient){
         float defaultCoefficient = 0.00f;
         if (currentCoefficient > defaultCoefficient) {
+            SharedPreferences prefs = getActivity()
+                    .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+            float breadUnits = Float.valueOf(prefs.getString(BREAD_UNITS, ""));
             return breadUnits * currentCoefficient;
         } else {
             Toast toast = Toast.makeText(
@@ -82,7 +115,27 @@ public class ShortInsulinFragment extends Fragment implements View.OnClickListen
             return defaultCoefficient;
         }
     }
-    private void selectCoefficient(){
+
+    @SuppressWarnings("ConstantConditions")
+    private float calculateCompensationInsulin(){
+        SharedPreferences prefs = getActivity()
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        boolean switchState = prefs.getBoolean(SWITCH_COMPENSATION_INSULIN, false);
+        if (!switchState){
+            return 0.0f;
+        }else {
+            float sugarInBlood = Float.valueOf(prefs.getString(SUGAR_IN_BLOOD, ""));
+            float targetGlucose = Float.valueOf(prefs.getString(TARGET_GLUCOSE, ""));
+            float sensitivityCoefficient = Float.valueOf(prefs.getString(SENSITIVITY_COEFFICIENT, ""));
+            return (sugarInBlood - targetGlucose) /sensitivityCoefficient;
+        }
+    }
+
+    //Получаем коэффициент по текущему времени
+    @SuppressWarnings("ConstantConditions")
+    private void selectCurrentCoefficient(){
+        SharedPreferences prefs = getActivity()
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
         // Текущее время
         JodaTimeAndroid.init(getActivity());
@@ -98,41 +151,44 @@ public class ShortInsulinFragment extends Fragment implements View.OnClickListen
         LocalTime beforeEveningTime = LocalTime.parse("23:00");
 
         if (now.isAfter(afterMorningTime) && now.isBefore(beforeMorningTime)){
-            currentCoefficient = Float.valueOf(mSettings.getString(MORNING_COEFFICIENT, ""));
+            currentCoefficient = Float.valueOf(prefs.getString(MORNING_COEFFICIENT, ""));
             Toast.makeText(getActivity(), "MorningTime " + now, Toast.LENGTH_LONG).show();
             Log.d(TAG, "MorningTime now " + now);
         }else if (now.isAfter(afterDayTime) && now.isBefore(beforeDayTime)){
-            currentCoefficient = Float.valueOf(mSettings.getString(DAY_COEFFICIENT, ""));
+            currentCoefficient = Float.valueOf(prefs.getString(DAY_COEFFICIENT, ""));
             Toast.makeText(getActivity(), "DayTime " + now, Toast.LENGTH_LONG).show();
             Log.d(TAG, "DayTime " + now);
         }else if (now.isAfter(afterEveningTime) && now.isBefore(beforeEveningTime)){
-            currentCoefficient = Float.valueOf(mSettings.getString(EVENING_COEFFICIENT, ""));
+            currentCoefficient = Float.valueOf(prefs.getString(EVENING_COEFFICIENT, ""));
             Toast.makeText(getActivity(), "EveningTime " + now, Toast.LENGTH_LONG).show();
             Log.d(TAG, "EveningTime " + now);
         }else {
-            currentCoefficient = Float.valueOf(mSettings.getString(NIGHT_COEFFICIENT, ""));
+            currentCoefficient = Float.valueOf(prefs.getString(NIGHT_COEFFICIENT, ""));
             Toast.makeText(getActivity(), "NightTime " + now, Toast.LENGTH_LONG).show();
             Log.d(TAG, "NightTime " + now);
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnMinusShortInsulin:
+    @OnClick({R.id.btn_minus_short_insulin, R.id.btn_plus_short_insulin,
+            R.id.view_click_long_insulin, R.id.btn_further})
+    void onClick(View view){
+        switch (view.getId()){
+            case R.id.btn_minus_short_insulin:
                 decrementShortInsulin();
                 break;
-            case R.id.btnPlusShortInsulin:
+            case R.id.btn_plus_short_insulin:
                 incrementShortInsulin();
                 break;
-            case R.id.viewClickShortInsulin:
+            case R.id.view_click_long_insulin:
                 mListener.openLongInsulinFragment();
                 break;
-            case R.id.btnFurther:
+            case R.id.btn_further:
                 mListener.openTotalRecordFragment();
+                break;
         }
     }
 
+    //Уменьшаем короткий инсулин
     private void decrementShortInsulin(){
         float shortInsulin = Float.valueOf(etShortInsulin.getText().toString());
         if (shortInsulin >0.0f){
@@ -144,6 +200,7 @@ public class ShortInsulinFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    //Увеличиваем короткий инсулин
     private void incrementShortInsulin(){
         float shortInsulin = Float.valueOf(etShortInsulin.getText().toString());
         if (shortInsulin <1.0f){
@@ -160,7 +217,7 @@ public class ShortInsulinFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public void onAttach(Context context){
+    public void onAttach(@NonNull Context context){
         super.onAttach(context);
         Log.d(TAG, "onAttach: ShortInsulinFragment");
         if (context instanceof OnShortInsulinFragmentListener){
@@ -211,6 +268,7 @@ public class ShortInsulinFragment extends Fragment implements View.OnClickListen
     @Override
     public void onDetach() {
         super.onDetach();
+        mListener = null;
         Log.d(TAG, "onDetach: ShortInsulinFragment");
     }
 }

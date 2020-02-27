@@ -1,11 +1,12 @@
 package com.maksimohotnikov.mydiary;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -15,26 +16,32 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
-
 import static com.maksimohotnikov.mydiary.CoefficientFragment.*;
+import static com.maksimohotnikov.mydiary.CompensationFragment.SWITCH_COMPENSATION_INSULIN;
+import static com.maksimohotnikov.mydiary.CompensationFragment.TARGET_GLUCOSE;
 import static com.maksimohotnikov.mydiary.MainActivity.TAG;
 
 
-public class SettingsFragment extends Fragment implements View.OnClickListener {
+public class SettingsFragment extends Fragment {
 
     static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.SettingsFragment";
     private OnFragmentInteractionListener mListener;
-    private SharedPreferences mSettings;
-    @BindView(R.id.viewCoefficients) View viewCoefficients;
-    @BindView(R.id.viewCompensation) View viewCompensation;
-    @BindView(R.id.viewActiveInsulin) View viewActiveInsulin;
-    @BindView(R.id.iwInfo) ImageView iwInfo;
-    @BindView(R.id.tvCoefficients) TextView tvCoefficients;
+    @BindView(R.id.tv_coefficients)
+    TextView tvCoefficients;
+    @BindView(R.id.tv_compensation)
+    TextView tvCompensation;
+    @BindView(R.id.arrow_down_3)
+    ImageView ivArrowDown;
+    @BindView(R.id.image_view_arrow_up)
+    ImageView ivArrowUp;
+    @BindView(R.id.tv_daily_dose_insulin_formula)
+    TextView tvDailyDoseInsulinFormula;
     private Unbinder unbinder;
+    private boolean showHint = true;
 
     public SettingsFragment() {
 
@@ -47,30 +54,81 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "SettingsFragment. onCreate");
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         unbinder = ButterKnife.bind(this, view);
         getActivity().setTitle(R.string.settings);
-        mSettings = getActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-
-        viewCoefficients.setOnClickListener(this);
-        viewCompensation.setOnClickListener(this);
-        viewActiveInsulin.setOnClickListener(this);
-        iwInfo.setOnClickListener(this);
+        onOffCompensationInsulin();
 
         Log.d(TAG, "SettingsFragment. onCreateView");
         return view;
     }
-    private void setCoefficient(){
 
-        String morningCoefficient = mSettings.getString(MORNING_COEFFICIENT, "");
-        String dayCoefficient = mSettings.getString(DAY_COEFFICIENT, "");
-        String eveningCoefficient = mSettings.getString(EVENING_COEFFICIENT, "");
-        String nightCoefficient = mSettings.getString(NIGHT_COEFFICIENT, "");
+    @OnClick({R.id.view_coefficients, R.id.view_compensation, R.id.view_active_insulin,
+            R.id.iw_info, R.id.arrow_down_3, R.id.image_view_arrow_up})
+    void viewOnClick(View view){
+        switch (view.getId()){
+            case R.id.view_compensation:
+                mListener.openCompensationFragment();
+                break;
+            case R.id.view_coefficients:
+                mListener.openCoefficientFragment();
+            case R.id.view_active_insulin:
+                mListener.openActiveInsulinFragment();
+                break;
+            case R.id.iw_info:
+                mListener.openInfoFragment();
+                break;
+            case R.id.arrow_down_3:
+                if (showHint) {
+                    rotateUp(ivArrowDown);
+                } else {
+                    rotateDown(ivArrowDown);
+                }
+                break;
+        }
+    }
+    //Вращаем стрелку вверх
+    private void rotateUp(ImageView ivArrowDown) {
+        ObjectAnimator rotate = ObjectAnimator.ofFloat(ivArrowDown, "rotation", 0f, 180f);
+        //rotate.setRepeatCount(10);  колличество вращений
+        rotate.setDuration(100);
+        rotate.start();
+        tvDailyDoseInsulinFormula.setVisibility(View.VISIBLE);
+        showHint = false;
+    }
+
+    //Вращаем стрелку вниз
+    private void rotateDown(ImageView ivArrowDown) {
+        ObjectAnimator rotate = ObjectAnimator.ofFloat(ivArrowDown, "rotation", 180f, 360f);
+        //rotate.setRepeatCount(10);  колличество вращений
+        rotate.setDuration(100);
+        rotate.start();
+        tvDailyDoseInsulinFormula.setVisibility(View.GONE);
+        showHint = true;
+    }
+
+    //олучаем коэффициенты из my_setting.xml
+    @SuppressWarnings("ConstantConditions")
+    private void getCoefficient(){
+        SharedPreferences prefs = getActivity()
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        String morningCoefficient = prefs.getString(MORNING_COEFFICIENT, "");
+        String dayCoefficient = prefs.getString(DAY_COEFFICIENT, "");
+        String eveningCoefficient = prefs.getString(EVENING_COEFFICIENT, "");
+        String nightCoefficient = prefs.getString(NIGHT_COEFFICIENT, "");
+        onOffCoefficient(morningCoefficient, dayCoefficient, eveningCoefficient, nightCoefficient);
+
+    }
+
+    //Отображаем указаны или нет коэффициенты
+    private void onOffCoefficient(String morningCoefficient, String dayCoefficient,
+                                  String eveningCoefficient, String nightCoefficient){
         if (morningCoefficient.equals("0.00") || dayCoefficient.equals("0.00")
-            || eveningCoefficient.equals("0.00") || nightCoefficient.equals("0.00")){
+                || eveningCoefficient.equals("0.00") || nightCoefficient.equals("0.00")){
             tvCoefficients.setText(R.string.not_set);
             tvCoefficients.setTextColor(Color.RED);
             Toast toast = Toast.makeText(
@@ -79,27 +137,21 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             toast.show();
         }else {
             tvCoefficients.setText(R.string.set);
-            Toast toast = Toast.makeText(
-                    getActivity(), R.string.coefficient_saved, Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.viewCoefficients:
-                mListener.openCoefficientFragment();
-                break;
-            case R.id.viewCompensation:
-                mListener.openCompensationFragment();
-                break;
-            case R.id.viewActiveInsulin:
-                mListener.openActiveInsulinFragment();
-                break;
-            case R.id.iwInfo:
-                mListener.openInfoFragment();
+    //Отображаем включена или нет компенсация
+    @SuppressWarnings("ConstantConditions")
+    private void onOffCompensationInsulin(){
+        SharedPreferences prefs = getActivity()
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        boolean switchState = prefs.getBoolean(SWITCH_COMPENSATION_INSULIN, true);
+
+        if (switchState) {
+            String targetGlucose = prefs.getString(TARGET_GLUCOSE, "");
+            tvCompensation.setText(getString(R.string.compensation_on, targetGlucose));
+        }else {
+            tvCompensation.setText(R.string.compensation_off);
         }
     }
 
@@ -110,9 +162,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         void openInfoFragment();
     }
 
-
-    @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         Log.d(TAG, "SettingsFragment. onAttach");
         if (context instanceof OnFragmentInteractionListener) {
@@ -136,7 +186,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume(){
         super.onResume();
-        setCoefficient();
+        getCoefficient();
         Log.d(TAG, "SettingsFragment. onResume");
     }
     @Override
@@ -164,6 +214,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDetach() {
         super.onDetach();
+        mListener = null;
         Log.d(TAG, "SettingsFragment. onDetach");
     }
 

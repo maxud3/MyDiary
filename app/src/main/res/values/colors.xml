@@ -8,5 +8,10 @@
     <color name="inactive_button">#E0E0E0</color>
     <color name="cancel">#FF5252</color>
     <color name="line">#BDBDBD</color>
-
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#1E88E5</color>
+    <color name="blue1">#2196F3</color>
+    <color name="blue2">#42A5F5</color>
+    <color name="blue3">#64B5F6</color>
+    <color name="red500">#F44336</color>
 </resources>

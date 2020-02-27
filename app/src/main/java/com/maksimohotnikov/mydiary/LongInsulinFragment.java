@@ -1,6 +1,9 @@
 package com.maksimohotnikov.mydiary;
 
+import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,21 +12,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import static com.maksimohotnikov.mydiary.SugarInBloodFragment.*;
 
-public class LongInsulinFragment extends Fragment implements View.OnClickListener{
+public class LongInsulinFragment extends Fragment {
 
-    public final static String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.LongInsulinFragment";
-
-    @BindView(R.id.btnPlusLongInsulin) Button btnPlusLongInsulin;
-    @BindView(R.id.btnMinusLongInsulin) Button btnMinusLongInsulin;
-    @BindView(R.id.etLongInsulin) EditText etLongInsulin;
+    final static String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.LongInsulinFragment";
+    private OnLongInsulinFragmentListener mListener;
+    @BindView(R.id.btn_plus_long_insulin)
+    Button btnPlusLongInsulin;
+    @BindView(R.id.btn_minus_long_insulin)
+    Button btnMinusLongInsulin;
+    @BindView(R.id.et_long_insulin)
+    EditText etLongInsulin;
     private Unbinder unbinder;
-
-    public LongInsulinFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,21 +42,20 @@ public class LongInsulinFragment extends Fragment implements View.OnClickListene
 
         etLongInsulin.setText("2.0");
 
-        btnMinusLongInsulin.setOnClickListener(this);
-        btnPlusLongInsulin.setOnClickListener(this);
-
         return view;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnMinusLongInsulin:
+    @OnClick({R.id.btn_minus_long_insulin, R.id.btn_plus_long_insulin, R.id.btn_further})
+    void onClick(View view){
+        switch (view.getId()){
+            case R.id.btn_minus_long_insulin:
                 decrementLongInsulin();
                 break;
-            case R.id.btnPlusLongInsulin:
+            case R.id.btn_plus_long_insulin:
                 incrementLongInsulin();
                 break;
+            case R.id.btn_further:
+                mListener.openTotalRecordFragment();
         }
     }
 
@@ -79,16 +81,19 @@ public class LongInsulinFragment extends Fragment implements View.OnClickListene
         }
     }
 
-   /* @Override
-    public void onAttach(Context context) {
+    public interface OnLongInsulinFragmentListener{
+        void openTotalRecordFragment();
+    }
+    @Override
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnLongInsulinFragmentListener) {
+            mListener = (OnLongInsulinFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-    }*/
+    }
 
    @Override
    public void onDestroy(){
@@ -98,23 +103,6 @@ public class LongInsulinFragment extends Fragment implements View.OnClickListene
     @Override
     public void onDetach() {
         super.onDetach();
-        //mListener = null;
+        mListener = null;
     }
-
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-   /* public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }*/
 }

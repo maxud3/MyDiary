@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etMorningCoefficient"
+        android:id="@+id/et_morning_coefficient"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view5" />
 
     <EditText
-        android:id="@+id/etDayCoefficient"
+        android:id="@+id/et_day_coefficient"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view6" />
 
     <EditText
-        android:id="@+id/etEveningCoefficient"
+        android:id="@+id/et_evening_coefficient"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -116,7 +116,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view7" />
 
     <EditText
-        android:id="@+id/etNightCoefficient"
+        android:id="@+id/et_night_coefficient"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

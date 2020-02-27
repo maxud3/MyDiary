@@ -4,26 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue3"
     tools:context=".LongInsulinFragment">
 
+    <View
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
-        style="@style/TextViewFragmentStyle"
+        style="@style/text_view_h1"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:text="@string/long_insulin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/attentionInsulin"
+        android:id="@+id/tv_attention_insulin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/ukrainian_free_set"
         android:text="@string/attention_insulin"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@color/red500"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -31,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
-        android:id="@+id/btnMinusLongInsulin"
+        android:id="@+id/btn_minus_long_insulin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -39,24 +51,25 @@
         android:background="@color/btn"
         android:text="@string/btnMinus"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/attentionInsulin" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_attention_insulin" />
 
     <EditText
-        android:id="@+id/etLongInsulin"
+        android:id="@+id/et_long_insulin"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="64dp"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        android:labelFor="@id/etLongInsulin"
+        android:labelFor="@id/et_long_insulin"
+        android:text="@string/default_bread_units"
         android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintEnd_toStartOf="@+id/btnPlusLongInsulin"
-        app:layout_constraintStart_toEndOf="@+id/btnMinusLongInsulin"
-        app:layout_constraintTop_toBottomOf="@+id/attentionInsulin" />
+        app:layout_constraintEnd_toStartOf="@+id/btn_plus_long_insulin"
+        app:layout_constraintStart_toEndOf="@+id/btn_minus_long_insulin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_attention_insulin" />
 
     <Button
-        android:id="@+id/btnPlusLongInsulin"
+        android:id="@+id/btn_plus_long_insulin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -64,9 +77,10 @@
         android:background="@color/btn"
         android:text="@string/btnPlus"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/attentionInsulin" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_attention_insulin" />
+
     <Button
-        android:id="@+id/btnFurther"
+        android:id="@+id/btn_further"
         style="@style/ButtonFurther"
         android:layout_width="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
