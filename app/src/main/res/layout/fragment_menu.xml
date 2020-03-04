@@ -65,7 +65,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@color/btn"
-        android:text="@string/bread_units"
+        android:text="@string/brd_units"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_find_add_product"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -172,7 +172,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/bread_units"
+        android:text="@string/brd_units"
         android:textSize="16sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/et_bread_units"
         app:layout_constraintStart_toEndOf="@+id/et_bread_units" />
@@ -181,7 +181,7 @@
         android:id="@+id/group_selected_bread_units"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:constraint_referenced_ids="textView19,textView21" />
 
     <TextView
@@ -198,7 +198,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/bread_units"
+        android:text="@string/brd_units"
         android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_bread_units"
         app:layout_constraintStart_toEndOf="@+id/tv_bread_units" />

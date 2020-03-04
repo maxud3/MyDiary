@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:text="@string/sugar_in_blood"
+        android:text="@string/carbohydrates"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,77 +36,79 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_warning"
-        android:layout_width="0dp"
+    <NumberPicker
+        android:id="@+id/np_bread_units"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textAlignment="center"
-        android:textColor="@color/red500"
+        android:layout_marginTop="32dp"
+        android:fadingEdge="vertical"
+        android:scrollbarSize="4dp"
+        android:theme="@style/AppTheme.Picker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <EditText
-        android:id="@+id/et_bread_units"
-        android:layout_width="100dp"
+    <TextView
+        android:id="@+id/tv_total_carbohydrates"
+        style="@style/text_view_h2"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="82dp"
-        android:importantForAutofill="no"
-        android:inputType="numberDecimal"
-        android:labelFor="@+id/et_bread_units"
-        android:textAlignment="center"
-        android:textSize="44sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_warning"
-        tools:text="@string/default_sugar_in_blood" />
-
-    <Button
-        android:id="@+id/btn_minus_bread_units"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="82dp"
-        android:text="@string/btnMinus"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toStartOf="@+id/et_bread_units"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_warning" />
-
-    <Button
-        android:id="@+id/btn_plus_bread_units"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="82dp"
-        android:text="@string/btnPlus"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/et_bread_units"
-        app:layout_constraintTop_toBottomOf="@+id/tv_warning" />
+        android:layout_marginStart="16dp"
+        android:text="@string/zero"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <TextView
-        android:id="@+id/tv_selected_bread_units"
+        android:id="@+id/textView3"
         style="@style/text_view_h2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="80dp"
-        android:text="@string/no_measuring"
+        android:layout_marginTop="32dp"
+        android:text="@string/carbohydrates"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_bread_units" />
+        app:layout_constraintTop_toBottomOf="@+id/np_bread_units" />
 
-    <Switch
-        android:id="@+id/switch_no_measuring"
+    <TextView
+        android:id="@+id/textView35"
+        style="@style/text_view_h2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_selected_bread_units"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginStart="16dp"
+        android:text="@string/gram"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_total_carbohydrates"
+        app:layout_constraintStart_toEndOf="@+id/tv_total_carbohydrates"
+        app:layout_constraintTop_toTopOf="@+id/tv_total_carbohydrates" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/grou_sugar_in_blood"
+    <TextView
+        android:id="@+id/textView36"
+        style="@style/text_view_h2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="et_bread_units,btn_minus_bread_units,btn_plus_bread_units" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/bread_units"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/tv_total_bread_units"
+        style="@style/text_view_h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/zero_zero"
+        app:layout_constraintBottom_toBottomOf="@+id/textView36"
+        app:layout_constraintStart_toEndOf="@+id/textView36"
+        app:layout_constraintTop_toTopOf="@+id/textView36" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_further"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

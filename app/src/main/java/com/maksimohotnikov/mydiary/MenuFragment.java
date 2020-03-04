@@ -14,18 +14,17 @@ import androidx.constraintlayout.widget.Group;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static com.maksimohotnikov.mydiary.MainActivity.TAG;
-import static com.maksimohotnikov.mydiary.MySettingFragment.APP_PREFERENCES;
+//import static com.maksimohotnikov.mydiary.MainActivity.*;
+
 import static com.maksimohotnikov.mydiary.SugarInBloodFragment.*;
 
 
-public class MenuFragment extends Fragment /*implements View.OnClickListener*/ {
+public class MenuFragment extends Fragment {
 
     static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.MenuFragment";
     static final String BREAD_UNITS = "breadUnits";
@@ -50,7 +49,7 @@ public class MenuFragment extends Fragment /*implements View.OnClickListener*/ {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d(TAG, "onCreate: MenuFragment");
+        Log.d(MainActivity.TAG, "onCreate: MenuFragment");
     }
 
     @Override
@@ -95,7 +94,7 @@ public class MenuFragment extends Fragment /*implements View.OnClickListener*/ {
 
     //Уменьшаем хлебные единицы
     private void decrementBreadUnits (){
-        float breadUnits = Float.valueOf(etBreadUnits.getText().toString());
+        float breadUnits = Float.parseFloat(etBreadUnits.getText().toString());
         if (breadUnits > 0.0f){
             btnPlusBreadUnits.setEnabled(true);
             breadUnits = decrement(breadUnits);
@@ -108,7 +107,7 @@ public class MenuFragment extends Fragment /*implements View.OnClickListener*/ {
 
     //Увеличиваем хлебные единицы
     private void incrementBreadUnits(){
-        float breadUnits = Float.valueOf(etBreadUnits.getText().toString());
+        float breadUnits = Float.parseFloat(etBreadUnits.getText().toString());
         if (breadUnits < 50.0f){
             btnMinusBreadUnits.setEnabled(true);
             breadUnits = increment(breadUnits);
@@ -127,7 +126,7 @@ public class MenuFragment extends Fragment /*implements View.OnClickListener*/ {
             breadUnits = getString(R.string.zero_zero);
         }
         SharedPreferences.Editor prefEditor = getActivity()
-                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE)
                 .edit();
         prefEditor.putString(BREAD_UNITS, breadUnits);
         prefEditor.apply();
@@ -150,7 +149,7 @@ public class MenuFragment extends Fragment /*implements View.OnClickListener*/ {
     @Override
     public void onPause(){
         super.onPause();
-        Log.d(TAG, "onPause: MenuFragment");
+        Log.d(MainActivity.TAG, "onPause: MenuFragment");
         saveBreadUnits();
     }
     @Override

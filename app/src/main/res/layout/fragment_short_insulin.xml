@@ -41,43 +41,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
-        android:id="@+id/btn_minus_short_insulin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:background="@color/btn"
-        android:text="@string/btnMinus"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_attention_insulin" />
-
-    <EditText
-        android:id="@+id/et_short_insulin"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:importantForAutofill="no"
-        android:inputType="numberDecimal"
-        android:labelFor="@id/et_short_insulin"
-        android:text="@string/default_bread_units"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_plus_short_insulin"
-        app:layout_constraintStart_toEndOf="@+id/btn_minus_short_insulin"
-        app:layout_constraintTop_toBottomOf="@+id/tv_attention_insulin" />
-
-    <Button
-        android:id="@+id/btn_plus_short_insulin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:background="@color/btn"
-        android:text="@string/btnPlus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_attention_insulin" />
-
-    <Button
         android:id="@+id/btn_further"
         style="@style/ButtonFurther"
         android:layout_width="match_parent"
@@ -90,12 +53,12 @@
         style="@style/text_view_h2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="42dp"
         android:text="@string/long_insulin"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_short_insulin" />
+        app:layout_constraintTop_toBottomOf="@+id/number_picker" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -108,13 +71,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView20" />
 
+
     <View
         android:id="@+id/view_click_long_insulin"
         style="@style/viewClick"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_short_insulin" />
+        app:layout_constraintTop_toBottomOf="@+id/number_picker" />
 
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="@string/number_picker_point"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_attention_insulin" />
+
+    <NumberPicker
+        android:id="@+id/number_picker"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:theme="@style/AppTheme.Picker"
+        app:layout_constraintEnd_toStartOf="@+id/textView38"
+        app:layout_constraintTop_toBottomOf="@+id/tv_attention_insulin" />
+
+    <NumberPicker
+        android:id="@+id/number_picker_2"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:theme="@style/AppTheme.Picker"
+        app:layout_constraintStart_toEndOf="@+id/textView38"
+        app:layout_constraintTop_toBottomOf="@+id/tv_attention_insulin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

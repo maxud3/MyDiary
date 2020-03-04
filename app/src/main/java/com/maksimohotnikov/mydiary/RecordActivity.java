@@ -14,6 +14,7 @@ import static com.maksimohotnikov.mydiary.MainActivity.TAG;
 
 public class RecordActivity extends AppCompatActivity implements SugarInBloodFragment
         .OnSugarInBloodFragmentListener, MenuFragment.OpenInsulinFragment,
+        BreadUnitsFragment.OnBreadUnitsFragmentListener,
         ShortInsulinFragment.OnShortInsulinFragmentListener,
         LongInsulinFragment.OnLongInsulinFragmentListener{
 
@@ -51,12 +52,28 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment instanceof SugarInBloodFragment){
             Fragment fragmentReplace;
-            fragmentReplace = new MenuFragment();
+            fragmentReplace = new BreadUnitsFragment();
 
             fm.beginTransaction()
-                    .replace(R.id.container, fragmentReplace, MenuFragment.TAG_FRAGMENT)
+                    .replace(R.id.container, fragmentReplace, BreadUnitsFragment.TAG_FRAGMENT)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .addToBackStack(MenuFragment.TAG_FRAGMENT)
+                    .addToBackStack(BreadUnitsFragment.TAG_FRAGMENT)
+                    .commit();
+        }
+    }
+    @Override
+    public void openShortInsulinFragment() {
+        fm = getSupportFragmentManager();
+
+        Fragment fragment = fm.findFragmentById(R.id.container);
+        if (fragment instanceof BreadUnitsFragment){
+            Fragment fragmentReplace;
+            fragmentReplace = new ShortInsulinFragment();
+
+            fm.beginTransaction()
+                    .replace(R.id.container, fragmentReplace,ShortInsulinFragment.TAG_FRAGMENT)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .addToBackStack(ShortInsulinFragment.TAG_FRAGMENT)
                     .commit();
         }
     }

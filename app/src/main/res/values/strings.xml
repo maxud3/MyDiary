@@ -25,9 +25,16 @@
     <string name="btnMinus">-</string>
     <string name="btnPlus">+</string>
     <string name="no_measuring">Измерение не проводилось</string>
+    <!-- BreadUnitsFragments-->
+    <string name="brd_units">ХЕ</string>
+    <string name="bread_units">Хлебные единици</string>
+    <string name="bread_units_total">Хлебные единици : %s</string>
+    <string name="carbohydrates">Углеводы</string>
+    <string name="gram">гр.</string>
+
     <!-- MenuFragment-->
     <string name="menu">Меню</string>
-    <string name="bread_units">ХЕ</string>
+
     <string name="cancel">отмена</string>
     <string name="ok">OK</string>
     <string name="find_add_product">найти или добавить продукт</string>
@@ -73,7 +80,6 @@
         условная единица, разработанная немецкими диетологами, используется для приблизительной
         оценки количества углеводов в продуктах: одна ХЕ равна 10 (без учёта пищевых волокон) или
         12 граммам (с учётом балластных веществ) углеводов</string>
-    <string name="gramm">г.</string>
     <string name="indicate_coefficient">Укажите коэффициент! Иначе расчет дозы инсулина будет
         невозможен.</string>
     <string name="compensation_on">%s ммоль/л</string>
@@ -125,5 +131,6 @@
     <string name="zero">0</string>
     <string name="hint_dayli_dose_insulin">0</string>
     <string name="hint_bread_units">12</string>
+    <string name="number_picker_point">.</string>
 
 </resources>

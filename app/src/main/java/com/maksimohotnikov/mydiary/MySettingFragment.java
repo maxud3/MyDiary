@@ -28,9 +28,11 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+//import static com.maksimohotnikov.mydiary.MainActivity.*;
+
 public class MySettingFragment extends Fragment {
     static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.MySettingFragment";
-    static final String APP_PREFERENCES = "my_settings";
+    //static final String APP_PREFERENCES = "my_settings";
     static final String MORNING_COEFFICIENT = "morningCoefficient";
     static final String DAY_COEFFICIENT = "dayCoefficient";
     static final String EVENING_COEFFICIENT = "eveningCoefficient";
@@ -43,7 +45,7 @@ public class MySettingFragment extends Fragment {
     static final String DAILY_DOSE_INSULIN = "dailyDoseInsulin";
     static final String CARBOHYDRATES_IN_BREAD_UNIT = "carbohydratesInBreadUnit";
 
-    Unbinder unbinder;
+    private Unbinder unbinder;
     @BindView(R.id.arrow_down) ImageView ivArrowDown;
     @BindView(R.id.arrow_down_1) ImageView ivArrowDown1;
     @BindView(R.id.arrow_down_2) ImageView ivArrowDown2;
@@ -104,19 +106,6 @@ public class MySettingFragment extends Fragment {
         loadDailyDoseInsulin();
         loadCarbohydratesInBreadUnit();
 
-        //etDailyDoseInsulin = view.findViewById(R.id.et_daily_dose_insulin);
-        /*etDailyDoseInsulin.setOnKeyListener((v, keyCode, event) -> {
-            if (event.getAction() == KeyEvent.ACTION_DOWN){
-                switch (keyCode){
-                    case KeyEvent.KEYCODE_DPAD_CENTER:
-                    case KeyEvent.KEYCODE_ENTER:
-                        return true;
-                    default:
-                        break;
-                }
-            }
-            return false;
-        });*/
         return view;
     }
 
@@ -124,7 +113,7 @@ public class MySettingFragment extends Fragment {
     @SuppressWarnings("ConstantConditions")
     private void saveCoefficients(){
         SharedPreferences.Editor prefEditor = getActivity()
-                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE)
                 .edit();
         prefEditor.putString(MORNING_COEFFICIENT, morningCoefficient());
         prefEditor.putString(DAY_COEFFICIENT, dayCoefficient());
@@ -140,7 +129,7 @@ public class MySettingFragment extends Fragment {
     @SuppressWarnings("ConstantConditions")
     private void loadCoefficient() {
         SharedPreferences prefs = getActivity()
-                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
         etMorningCoefficient.setText(prefs.getString(MORNING_COEFFICIENT, ""));
         etDayCoefficient.setText(prefs.getString(DAY_COEFFICIENT, ""));
         etEveningCoefficient.setText(prefs.getString(EVENING_COEFFICIENT, ""));
@@ -201,7 +190,7 @@ public class MySettingFragment extends Fragment {
     @SuppressWarnings("ConstantConditions")
     private void saveCompensationInsulinSettings() {
         SharedPreferences.Editor prefEditor = getActivity()
-                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE)
                 .edit();
             prefEditor.putBoolean(SWITCH_COMPENSATION_INSULIN, switchCompensationInsulin.isChecked());
             prefEditor.putString(TARGET_GLUCOSE, etTargetGlucose.getText().toString());
@@ -219,7 +208,7 @@ public class MySettingFragment extends Fragment {
     @SuppressWarnings("ConstantConditions")
     private void loadCompensationInsulinSettings(){
         SharedPreferences prefs = getActivity()
-                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
         boolean switchState = prefs.getBoolean(SWITCH_COMPENSATION_INSULIN, true);
         if (switchState){
             String targetGlucose = etTargetGlucose.getText().toString();
@@ -240,7 +229,7 @@ public class MySettingFragment extends Fragment {
         String dailyDoseInsulin = etDailyDoseInsulin.getText().toString();
         String defaultDailyDoseInsulin = "0";
         SharedPreferences.Editor prefEditor = getActivity()
-                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE)
                 .edit();
         if (dailyDoseInsulin.equals("")){
             prefEditor.putString(DAILY_DOSE_INSULIN, defaultDailyDoseInsulin);
@@ -255,7 +244,7 @@ public class MySettingFragment extends Fragment {
     @SuppressWarnings("ConstantConditions")
     private void loadDailyDoseInsulin(){
         SharedPreferences prefs = getActivity()
-                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
         etDailyDoseInsulin.setText(prefs.getString(DAILY_DOSE_INSULIN, ""));
     }
 
@@ -263,7 +252,7 @@ public class MySettingFragment extends Fragment {
     @SuppressWarnings("ConstantConditions")
     private void saveCarbohydratesInBreadUnit(){
         SharedPreferences.Editor prefEditor = getActivity()
-                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE)
                 .edit();
         prefEditor.putString(CARBOHYDRATES_IN_BREAD_UNIT, etCarbohydratesInBreadUnit.getText().toString());
         prefEditor.apply();
@@ -273,7 +262,7 @@ public class MySettingFragment extends Fragment {
     @SuppressWarnings("ConstantConditions")
     private void loadCarbohydratesInBreadUnit(){
         SharedPreferences prefs = getActivity()
-                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
         etCarbohydratesInBreadUnit.setText(prefs.getString(CARBOHYDRATES_IN_BREAD_UNIT, ""));
     }
     @OnCheckedChanged(R.id.switch_compensation_insulin)
