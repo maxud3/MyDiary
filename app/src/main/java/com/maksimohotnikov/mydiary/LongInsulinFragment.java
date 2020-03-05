@@ -1,84 +1,67 @@
 package com.maksimohotnikov.mydiary;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.NumberPicker;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import static com.maksimohotnikov.mydiary.SugarInBloodFragment.*;
+
 
 public class LongInsulinFragment extends Fragment {
 
     final static String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.LongInsulinFragment";
+    private final String LONG_INSULIN_DOSE = "longInsulinDose";
+    private SharedPreferences settings;
     private OnLongInsulinFragmentListener mListener;
-    @BindView(R.id.btn_plus_long_insulin)
-    Button btnPlusLongInsulin;
-    @BindView(R.id.btn_minus_long_insulin)
-    Button btnMinusLongInsulin;
-    @BindView(R.id.et_long_insulin)
-    EditText etLongInsulin;
+    @BindView(R.id.number_picker1_long_insulin)
+    NumberPicker np1LongInsulin;
+    private String longInsulinDose;
     private Unbinder unbinder;
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        settings = getActivity()
+                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
+        setLongInsulinDose();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view =  inflater.inflate(R.layout.fragment_long_insulin, container, false);
         unbinder =  ButterKnife.bind(this, view);
 
-        etLongInsulin.setText("2.0");
-
+        np1LongInsulin.setMinValue(0);
+        np1LongInsulin.setMaxValue(50);
+        np1LongInsulin.setValue(Integer.parseInt(longInsulinDose));
         return view;
     }
 
-    @OnClick({R.id.btn_minus_long_insulin, R.id.btn_plus_long_insulin, R.id.btn_further})
-    void onClick(View view){
-        switch (view.getId()){
-            case R.id.btn_minus_long_insulin:
-                decrementLongInsulin();
-                break;
-            case R.id.btn_plus_long_insulin:
-                incrementLongInsulin();
-                break;
-            case R.id.btn_further:
+    //Сохраняем дозу длинного инсулина
+    private void saveLongInsulinDose(){
+        String longInsulinDose = String.valueOf(np1LongInsulin.getValue());
+        SharedPreferences.Editor prefEditor = settings.edit();
+        prefEditor.putString(LONG_INSULIN_DOSE, longInsulinDose);
+        prefEditor.apply();
+
+    }
+    //устанавливаем предыдущую дозу длинного инсулина
+    private void setLongInsulinDose(){
+        longInsulinDose =  settings.getString(LONG_INSULIN_DOSE, "0");
+    }
+    @OnClick(R.id.btn_further)
+    void onClick(){
                 mListener.openTotalRecordFragment();
-        }
-    }
-
-    private void decrementLongInsulin(){
-        float longInsulin = Float.valueOf(etLongInsulin.getText().toString());
-        if (longInsulin > 0.0f){
-            btnPlusLongInsulin.setEnabled(true);
-            longInsulin = decrement(longInsulin);
-            etLongInsulin.setText(String.valueOf(roundUp(longInsulin, 1)));
-        }else {
-            btnMinusLongInsulin.setEnabled(false);
-        }
-    }
-
-    private void incrementLongInsulin(){
-        float longInsulin = Float.valueOf(etLongInsulin.getText().toString());
-        if (longInsulin <50.0f){
-            btnMinusLongInsulin.setEnabled(true);
-            longInsulin = increment(longInsulin);
-            etLongInsulin.setText(String.valueOf(roundUp(longInsulin, 1)));
-        }else {
-            btnPlusLongInsulin.setEnabled(false);
-        }
     }
 
     public interface OnLongInsulinFragmentListener{
@@ -95,11 +78,17 @@ public class LongInsulinFragment extends Fragment {
         }
     }
 
-   @Override
-   public void onDestroy(){
-       super.onDestroy();
-       unbinder.unbind();
-   }
+    @Override
+    public void onPause(){
+        super.onPause();
+        saveLongInsulinDose();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        unbinder.unbind();
+    }
     @Override
     public void onDetach() {
         super.onDetach();

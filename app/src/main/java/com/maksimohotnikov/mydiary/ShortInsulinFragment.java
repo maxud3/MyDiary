@@ -22,14 +22,12 @@ import butterknife.Unbinder;
 
 import static com.maksimohotnikov.mydiary.SugarInBloodFragment.*;
 
-
-
 public class ShortInsulinFragment extends Fragment {
 
     static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.ShortInsulinFragment";
     private static final int DIGITS = 1;
     private OnShortInsulinFragmentListener mListener;
-
+    private SharedPreferences settings;
 
     @BindView(R.id.number_picker)
     NumberPicker integerPicker;
@@ -41,10 +39,12 @@ public class ShortInsulinFragment extends Fragment {
     private String s1;
     private String s2;
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        settings = getActivity()
+                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
         selectCurrentCoefficient();
 
         Log.d(MainActivity.TAG, "onCreate: ShortInsulinFragment");
@@ -71,12 +71,9 @@ public class ShortInsulinFragment extends Fragment {
     }
 
     //Сохраняем дозу короткого инсулина
-    @SuppressWarnings("ConstantConditions")
     private void saveShortInsulinDose(){
         String totalShortInsulinDose = String.valueOf(roundUp(totalInsulin, DIGITS));
-        SharedPreferences.Editor prefEditor = getActivity()
-                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE)
-                .edit();
+        SharedPreferences.Editor prefEditor =settings.edit();
         String SHORT_INSULIN_DOSE = "shortInsulinDose";
         prefEditor.putString(SHORT_INSULIN_DOSE, totalShortInsulinDose);
         prefEditor.apply();
