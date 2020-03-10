@@ -36,8 +36,8 @@ public class ShortInsulinFragment extends Fragment {
     private Unbinder unbinder;
     private float currentCoefficient;
     private float totalInsulin;
-    private String s1;
-    private String s2;
+    private String valueIntegerPicker;
+    private String valueFractionPicker;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -61,10 +61,10 @@ public class ShortInsulinFragment extends Fragment {
         setTotalInsulinNumberPicker(totalInsulin);
         integerPicker.setMaxValue(9);
         integerPicker.setMinValue(0);
-        integerPicker.setValue(Integer.parseInt(s1));
+        integerPicker.setValue(Integer.parseInt(valueIntegerPicker));
         fractionPicker.setMaxValue(9);
         fractionPicker.setMinValue(0);
-        fractionPicker.setValue(Integer.parseInt(s2));
+        fractionPicker.setValue(Integer.parseInt(valueFractionPicker));
 
         Log.d(MainActivity.TAG, "onCreateView: ShortInsulinFragment");
         return view;
@@ -81,14 +81,14 @@ public class ShortInsulinFragment extends Fragment {
     //устанавливаем итоговую дозу инсулина
     private void setTotalInsulinNumberPicker(float totalInsulin){
         if (totalInsulin < 0.0f){
-            s1 = getString(R.string.zero);
-            s2 = getString(R.string.zero);
+            valueIntegerPicker = getString(R.string.zero);
+            valueFractionPicker = getString(R.string.zero);
         }else {
             String s = String.valueOf(roundUp(totalInsulin, DIGITS));
             String[] arrSplit = s.split("\\.");
             for (int i = 0; i < arrSplit.length; i++) {
-                s1 = arrSplit[0];
-                s2 = arrSplit[1];
+                valueIntegerPicker = arrSplit[0];
+                valueFractionPicker = arrSplit[1];
             }
         }
     }

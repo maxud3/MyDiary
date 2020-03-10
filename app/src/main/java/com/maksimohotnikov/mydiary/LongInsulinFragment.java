@@ -49,10 +49,10 @@ public class LongInsulinFragment extends Fragment {
 
     //Сохраняем дозу длинного инсулина
     private void saveLongInsulinDose(){
-        String longInsulinDose = String.valueOf(np1LongInsulin.getValue());
-        SharedPreferences.Editor prefEditor = settings.edit();
-        prefEditor.putString(LONG_INSULIN_DOSE, longInsulinDose);
-        prefEditor.apply();
+            String longInsulinDose = String.valueOf(np1LongInsulin.getValue());
+            SharedPreferences.Editor prefEditor = settings.edit();
+            prefEditor.putString(LONG_INSULIN_DOSE, longInsulinDose);
+            prefEditor.apply();
 
     }
     //устанавливаем предыдущую дозу длинного инсулина

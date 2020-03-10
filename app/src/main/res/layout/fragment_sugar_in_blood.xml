@@ -47,23 +47,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <EditText
-        android:id="@+id/et_bread_units"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="82dp"
-        android:importantForAutofill="no"
-        android:inputType="numberDecimal"
-        android:labelFor="@+id/et_bread_units"
-        android:textAlignment="center"
-        android:textSize="44sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_warning"
-        tools:text="@string/default_sugar_in_blood" />
+    <!-- <EditText
+         android:id="@+id/et_bread_units"
+         android:layout_width="100dp"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="82dp"
+         android:importantForAutofill="no"
+         android:inputType="numberDecimal"
+         android:labelFor="@+id/et_bread_units"
+         android:textAlignment="center"
+         android:textSize="44sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.498"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/tv_warning"
+         tools:text="@string/default_sugar_in_blood" />-->
 
-    <Button
+    <!-- <Button
         android:id="@+id/btn_minus_bread_units"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,9 +72,9 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@+id/et_bread_units"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_warning" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_warning" />-->
 
-    <Button
+    <!--<Button
         android:id="@+id/btn_plus_bread_units"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,7 +83,23 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/et_bread_units"
-        app:layout_constraintTop_toBottomOf="@+id/tv_warning" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_warning" />-->
+
+    <NumberPicker
+        android:id="@+id/number_picker1_sugar"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.Picker"
+        app:layout_constraintEnd_toStartOf="@+id/textView39"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
+
+    <NumberPicker
+        android:id="@+id/number_picker2_sugar"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.Picker"
+        app:layout_constraintStart_toEndOf="@+id/textView39"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
     <TextView
         android:id="@+id/tv_selected_bread_units"
@@ -91,22 +107,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="42dp"
         android:text="@string/no_measuring"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_bread_units" />
+        app:layout_constraintTop_toBottomOf="@+id/number_picker1_sugar" />
 
     <Switch
         android:id="@+id/switch_no_measuring"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_selected_bread_units"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_selected_bread_units"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_selected_bread_units" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/grou_sugar_in_blood"
+    <TextView
+        android:id="@+id/textView39"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="et_bread_units,btn_minus_bread_units,btn_plus_bread_units" />
+        android:layout_marginTop="48dp"
+        android:text="@string/number_picker_point"
+        android:textColor="@android:color/background_light"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
