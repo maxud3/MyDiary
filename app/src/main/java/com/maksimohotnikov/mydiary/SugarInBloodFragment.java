@@ -47,7 +47,7 @@ public class SugarInBloodFragment extends Fragment {
         super.onCreate(savedInstanceState);
         settings = getActivity()
                 .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
-        loadSugarInBlood();
+
     }
 
     @Override
@@ -55,6 +55,7 @@ public class SugarInBloodFragment extends Fragment {
                              @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_sugar_in_blood, container, false);
         unbinder = ButterKnife.bind(this, view);
+        loadSugarInBlood();
         numberPicker1SugarInBlood.setOnValueChangedListener((picker, oldVal, newVal) -> {
             s =  String.valueOf(newVal);
             showWarning(s);
@@ -91,7 +92,11 @@ public class SugarInBloodFragment extends Fragment {
     private void saveSugarInBlood(){
         int i = numberPicker1SugarInBlood.getValue();
         int i1 = numberPicker2SugarInBlood.getValue();
-        String sugarInBlood = i + "." + i1;
+        if (switchNoMeasuring.isChecked()){
+            sugarInBlood = getString(R.string.zero_zero);
+        }else {
+            sugarInBlood = i + "." +i1;
+        }
         SharedPreferences.Editor prefEditor = settings.edit();
         prefEditor.putString(SUGAR_IN_BLOOD, sugarInBlood);
         prefEditor.putBoolean(SWITCH_NO_MEASURING, switchNoMeasuring.isChecked());
@@ -120,7 +125,7 @@ public class SugarInBloodFragment extends Fragment {
             tvWarning.setText(R.string.hypoglycemia);
             //etSugarInBlood.setTextColor(getResources().getColor(R.color.red500));
         }else if (f < 1.6){
-            tvWarning.setText(R.string.severe_hyperglycemia);
+            tvWarning.setText(R.string.severe_hypoglycemia);
             //etSugarInBlood.setTextColor(getResources().getColor(R.color.red500));
         }else if (f > 3.3 && f < 5.8){
             tvWarning.setText("");
@@ -159,16 +164,12 @@ public class SugarInBloodFragment extends Fragment {
         }
     }
 
-     static float decrement(float f){
+     /*static float decrement(float f){
         return f - 0.1f;
     }
      static float increment(float f){
         return f + 0.1f;
-    }
-
-     static BigDecimal roundUp(float value, int digits){
-        return new BigDecimal(""+value).setScale(digits, BigDecimal.ROUND_HALF_UP);
-    }
+    }*/
 
     @Override
     public void onPause(){

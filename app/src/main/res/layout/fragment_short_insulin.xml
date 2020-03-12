@@ -54,11 +54,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="24dp"
         android:text="@string/long_insulin"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/number_picker" />
+        app:layout_constraintTop_toBottomOf="@+id/textView42" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -75,11 +75,11 @@
     <View
         android:id="@+id/view_click_long_insulin"
         style="@style/viewClick"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/number_picker" />
+        app:layout_constraintTop_toBottomOf="@+id/textView42" />
 
     <TextView
         android:id="@+id/textView38"
@@ -110,6 +110,23 @@
         app:layout_constraintStart_toEndOf="@+id/textView38"
         app:layout_constraintTop_toTopOf="@+id/guideline9" />
 
+    <TextView
+        android:id="@+id/text_view_formula_insulin_for_food"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/background_light"
+        android:fontFamily="@font/ukrainian_free_set"
+        android:paddingStart="8dp"
+        android:paddingEnd="0dp"
+        android:text="@string/formula_insulin_for_food"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/number_picker" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
         android:layout_width="wrap_content"
@@ -123,4 +140,59 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
+
+    <ImageView
+        android:id="@+id/image_view_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:clickable="true"
+        android:contentDescription="@string/information"
+        android:focusable="true"
+        android:src="@drawable/ic_info_white_32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_formula_insulin_for_food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="text_view_formula_insulin_for_food,textView40,textView42"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/background_light"
+        android:fontFamily="@font/ukrainian_free_set"
+        android:paddingStart="8dp"
+        android:paddingEnd="0dp"
+        android:text="@string/compensation_off"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_formula_insulin_for_food" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/background_light"
+        android:fontFamily="@font/ukrainian_free_set"
+        android:paddingStart="8dp"
+        android:paddingEnd="0dp"
+        android:text="@string/total_insulin"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

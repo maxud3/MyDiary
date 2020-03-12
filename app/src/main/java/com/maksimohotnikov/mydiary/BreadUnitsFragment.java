@@ -19,7 +19,7 @@ public class BreadUnitsFragment extends Fragment {
 
     static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.BreadUnitsFragment";
     private final String CARBOHYDRATES = "carbohydrates";
-    private final String BREAD_UNITS = "breadUnits";
+    static final String BREAD_UNITS = "breadUnits";
     private SharedPreferences settings;
     private static final int DIGITS = 1;
     private OnBreadUnitsFragmentListener mListener;
@@ -57,7 +57,7 @@ public class BreadUnitsFragment extends Fragment {
         npBreadUnits.setOnValueChangedListener((picker, oldVal, newVal) -> {
             float breadUnits = newVal / 12.0f;
             tvTotalCarbohydrates.setText(String.valueOf(newVal));
-            tvTotalBreadUnits.setText(String.valueOf(SugarInBloodFragment.roundUp(breadUnits, DIGITS)));
+            tvTotalBreadUnits.setText(String.valueOf(ShortInsulinFragment.roundUp(breadUnits, DIGITS)));
         });
         return view;
     }

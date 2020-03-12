@@ -81,10 +81,10 @@ public class MenuFragment extends Fragment {
                 tvBreadUnits.setText(etBreadUnits.getText().toString());
                 break;
             case R.id.btn_minus_bread_units:
-                decrementBreadUnits();
+                //decrementBreadUnits();
                 break;
             case R.id.btn_plus_bread_units:
-                incrementBreadUnits();
+                //incrementBreadUnits();
                 break;
             case R.id.btn_further:
                 mListener.openInsulinFragment();
@@ -93,7 +93,7 @@ public class MenuFragment extends Fragment {
     }
 
     //Уменьшаем хлебные единицы
-    private void decrementBreadUnits (){
+    /*private void decrementBreadUnits (){
         float breadUnits = Float.parseFloat(etBreadUnits.getText().toString());
         if (breadUnits > 0.0f){
             btnPlusBreadUnits.setEnabled(true);
@@ -103,10 +103,10 @@ public class MenuFragment extends Fragment {
         }else {
             btnMinusBreadUnits.setEnabled(false);
         }
-    }
+    }*/
 
     //Увеличиваем хлебные единицы
-    private void incrementBreadUnits(){
+   /* private void incrementBreadUnits(){
         float breadUnits = Float.parseFloat(etBreadUnits.getText().toString());
         if (breadUnits < 50.0f){
             btnMinusBreadUnits.setEnabled(true);
@@ -116,7 +116,7 @@ public class MenuFragment extends Fragment {
         }else {
             btnPlusBreadUnits.setEnabled(false);
         }
-    }
+    }*/
 
     //Сохраняем хлебные единицы
     @SuppressWarnings("ConstantConditions")

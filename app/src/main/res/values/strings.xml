@@ -45,6 +45,7 @@
     <string name="short_insulin">Короткий инсулин</string>
     <string name="attention_insulin">Это расчетное значение! Проверти перед инъекцией.</string>
     <string name="dose_not_calculated">Доза инсулина не расчитана! Не указан коэффициент.</string>
+    <string name="dose_not_calculated_no_sugar">Доза инсулина не расчитана! Не указана глукоза.</string>
     <string name="long_insulin">Длинный инсулин</string>
     <string name="zero_zero">0.0</string>
     <string name="value_short_insulin">1.5</string>
@@ -65,7 +66,7 @@
     <string name="set">заданы</string>
     <string name="compensation">Компенсация</string>
     <string name="off">Выкл</string>
-    <string name="compensation_off">Компенсационный инсулин отключен</string>
+    <string name="compensation_off">Компенсация : отключена</string>
     <string name="parameters_saved">Параметры сохранены</string>
     <string name="error_parameters_saved">Укажите все параметры или отключите эту функцию.</string>
     <string name="active_insulin">Активный инсулин</string>
@@ -132,5 +133,8 @@
     <string name="hint_dayli_dose_insulin">0</string>
     <string name="hint_bread_units">12</string>
     <string name="number_picker_point">.</string>
+    <string name="for_food">На еду:</string>
+    <string name="formula_insulin_for_food">"На еду : %s(ХЕ) * %s(коефф.) = %s. "</string>
+    <string name="total_insulin">Итог :</string>
 
 </resources>
