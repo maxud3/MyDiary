@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class SettingsActivity extends AppCompatActivity implements
-        SettingsFragment.OnFragmentInteractionListener{
+public class SettingsActivity extends AppCompatActivity /*implements
+        SettingsFragment.OnFragmentInteractionListener*/{
 
     private FragmentManager fm;
 
@@ -39,7 +39,7 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
+   /* @Override
     public void openCoefficientFragment() {
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment instanceof SettingsFragment){
@@ -54,9 +54,9 @@ public class SettingsActivity extends AppCompatActivity implements
         }
         Toast toast = Toast.makeText(this, "click on viewCoefficients", Toast.LENGTH_LONG);
         toast.show();
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void openCompensationFragment() {
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment instanceof SettingsFragment){
@@ -72,19 +72,19 @@ public class SettingsActivity extends AppCompatActivity implements
         }
         Toast toast = Toast.makeText(this, "click on viewCompensation", Toast.LENGTH_LONG);
         toast.show();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void openActiveInsulinFragment() {
         Toast toast = Toast.makeText(this, "click on viewActiveInsulin", Toast.LENGTH_LONG);
         toast.show();
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void openInfoFragment() {
         Toast toast = Toast.makeText(this, "click on imageViewInfo", Toast.LENGTH_LONG);
         toast.show();
-    }
+    }*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();

@@ -41,9 +41,16 @@ public class ShortInsulinFragment extends Fragment {
     Group groupFormulaInsulinForFood;
     @BindView(R.id.text_view_formula_insulin_for_food)
     TextView tvFormulaInsulinForFood;
+    @BindView(R.id.formula_compensation)
+    TextView tvFormulaCompensation;
+
     private Unbinder unbinder;
     private float currentCoefficient;
     private float totalInsulin;
+    private float compensationInsulin;
+    private float topLine;
+    private float bottomLine;
+    private float insulinEat;
     private String valueIntegerPicker;
     private String valueFractionPicker;
     private String breadUnits;
@@ -56,6 +63,7 @@ public class ShortInsulinFragment extends Fragment {
     private String nightCoefficient;
     private boolean switchCompensationInsulin;
     private boolean switchNoMeasuringState;
+    private boolean visibleGroup = false;
     //Group group;
 
     @SuppressWarnings("ConstantConditions")
@@ -64,9 +72,6 @@ public class ShortInsulinFragment extends Fragment {
         super.onCreate(savedInstanceState);
         settings = getActivity()
                 .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
-
-
-
         Log.d(MainActivity.TAG, "onCreate: ShortInsulinFragment");
     }
 
@@ -79,8 +84,11 @@ public class ShortInsulinFragment extends Fragment {
         getSavedStringsParameters();
         getSavedBooleanParameters();
         selectCurrentCoefficient();
+        calculateInsulinEat(currentCoefficient);
+        calculateCompensationInsulin();
         calculateTotalInsulin();
         setTotalInsulinNumberPicker(totalInsulin);
+        setFormulaCompensation();
         integerPicker.setMaxValue(9);
         integerPicker.setMinValue(0);
         integerPicker.setValue(Integer.parseInt(valueIntegerPicker));
@@ -127,63 +135,59 @@ public class ShortInsulinFragment extends Fragment {
 
     //вычисляем итоговую дозу инсулина
     private void calculateTotalInsulin(){
-        if (switchNoMeasuringState || !switchCompensationInsulin){
-            totalInsulin = calculateInsulinEat(currentCoefficient);
+        if (switchNoMeasuringState){
+            totalInsulin = insulinEat;
         }else {
-            float insulinEat = calculateInsulinEat(currentCoefficient);
-            float compensationInsulin =  calculateCompensationInsulin();
             totalInsulin = insulinEat + compensationInsulin;
         }
     }
-    //Получаем boolean сохраненные параметры
-    private void getSavedBooleanParameters(){
-        switchNoMeasuringState = settings
-                .getBoolean(SugarInBloodFragment.SWITCH_NO_MEASURING, false);
-        switchCompensationInsulin = settings
-                .getBoolean(MySettingFragment.SWITCH_COMPENSATION_INSULIN, false);
-    }
-    //Получаем строковые сохраненные параметры
-    private void getSavedStringsParameters(){
-        morningCoefficient = settings
-                .getString(MySettingFragment.MORNING_COEFFICIENT, getString(R.string.zero_zero));
-        dayCoefficient = settings
-                .getString(MySettingFragment.DAY_COEFFICIENT, getString(R.string.zero_zero));
-        eveningCoefficient = settings
-                .getString(MySettingFragment.EVENING_COEFFICIENT, getString(R.string.zero_zero));
-        nightCoefficient = settings
-                .getString(MySettingFragment.NIGHT_COEFFICIENT, getString(R.string.zero_zero));
-        sugarInBlood = settings
-                .getString(SugarInBloodFragment.SUGAR_IN_BLOOD, getString(R.string.zero_zero));
-        targetGlucose = settings
-                .getString(MySettingFragment.TARGET_GLUCOSE, getString(R.string.zero_zero));
-        sensitivityCoefficient = settings
-                .getString(MySettingFragment.SENSITIVITY_COEFFICIENT, getString(R.string.zero_zero));
-        breadUnits = settings
-                .getString(BreadUnitsFragment.BREAD_UNITS, "0.0");
-    }
+
     //Расчитываем инсулин на еду по коэффициенту на текущее время
-    private float calculateInsulinEat (float currentCoefficient){
+    private void calculateInsulinEat (float currentCoefficient){
         float defaultCoefficient = Float.parseFloat(getString(R.string.default_coefficient));
         if (currentCoefficient > defaultCoefficient) {
             float f = Float.parseFloat(breadUnits);
-            return f * currentCoefficient;
+            insulinEat =  f * currentCoefficient;
+            setFormulaInsulinEat();
         } else {
             Toast toast = Toast.makeText(
                     getActivity(), R.string.dose_not_calculated, Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-            return defaultCoefficient;
+            insulinEat =  defaultCoefficient;
         }
     }
+    private void setFormulaInsulinEat(){
+        String s = String.valueOf(currentCoefficient);
+        String s1 = String.valueOf(roundUp(insulinEat, DIGITS));
+        tvFormulaInsulinForFood
+                .setText(getString(R.string.formula_insulin_for_food, breadUnits, s, s1));
+    }
     //Вычисляем компенсацию
-    private float calculateCompensationInsulin(){
+    private void calculateCompensationInsulin(){
+        float sgrInBlood = Float.parseFloat(sugarInBlood);
+        float trgGlucose = Float.parseFloat(targetGlucose);
+        float sensCoefficient = Float.parseFloat(sensitivityCoefficient);
         if (!switchCompensationInsulin){
-            return 0.0f;
+            compensationInsulin =  0.0f;
+        }else if (sgrInBlood >= bottomLine && sgrInBlood <= topLine){
+            compensationInsulin =  0.0f;
+        } else {
+            compensationInsulin =  (sgrInBlood - trgGlucose) /sensCoefficient;
+        }
+    }
+    private void setFormulaCompensation(){
+        float sgrInBlood = Float.parseFloat(sugarInBlood);
+        if(!switchCompensationInsulin){
+            tvFormulaCompensation.setText(R.string.compensation_off);
+        }else if (switchNoMeasuringState){
+            tvFormulaCompensation.setText(R.string.compensation_no_sugar);
+        }else if (sgrInBlood >= bottomLine && sgrInBlood <= topLine){
+            tvFormulaCompensation.setText(R.string.no_compensation_required);
         }else {
-            float sgrInBlood = Float.parseFloat(sugarInBlood);
-            float trgGlucose = Float.parseFloat(targetGlucose);
-            float sensCoefficient = Float.parseFloat(sensitivityCoefficient);
-            return (sgrInBlood - trgGlucose) /sensCoefficient;
+            String s = String.valueOf(roundUp(compensationInsulin, DIGITS));
+            tvFormulaCompensation.setText(getString(R.string
+                    .formula_compensation, sugarInBlood, targetGlucose, sensitivityCoefficient, s));
         }
     }
 
@@ -217,14 +221,13 @@ public class ShortInsulinFragment extends Fragment {
     void onClick(View view){
         switch (view.getId()){
             case R.id.image_view_info:
-                groupFormulaInsulinForFood.setVisibility(View.VISIBLE);
-                String s = String.valueOf(currentCoefficient);
-                String s1 = String.valueOf(roundUp(totalInsulin, DIGITS));
-                tvFormulaInsulinForFood
-                        .setText(getString(R.string.formula_insulin_for_food, breadUnits, s, s1));
-                /*FormulaDialogFragment dialog = new FormulaDialogFragment();
-                dialog.show(Objects.requireNonNull(getActivity())
-                        .getSupportFragmentManager(), "custom");*/
+                if (!visibleGroup){
+                    visibleGroup = true;
+                    groupFormulaInsulinForFood.setVisibility(View.VISIBLE);
+                }else {
+                    visibleGroup = false;
+                    groupFormulaInsulinForFood.setVisibility(View.GONE);
+                }
                 break;
             case R.id.view_click_long_insulin:
                 saveShortInsulinDose();
@@ -242,6 +245,36 @@ public class ShortInsulinFragment extends Fragment {
         void openTotalRecordFragment();
     }
 
+    //Получаем boolean сохраненные параметры
+    private void getSavedBooleanParameters(){
+        switchNoMeasuringState = settings
+                .getBoolean(SugarInBloodFragment.SWITCH_NO_MEASURING, false);
+        switchCompensationInsulin = settings
+                .getBoolean(MySettingFragment.SWITCH_COMPENSATION_INSULIN, false);
+    }
+    //Получаем строковые сохраненные параметры
+    private void getSavedStringsParameters(){
+        morningCoefficient = settings
+                .getString(MySettingFragment.MORNING_COEFFICIENT, getString(R.string.zero_zero));
+        dayCoefficient = settings
+                .getString(MySettingFragment.DAY_COEFFICIENT, getString(R.string.zero_zero));
+        eveningCoefficient = settings
+                .getString(MySettingFragment.EVENING_COEFFICIENT, getString(R.string.zero_zero));
+        nightCoefficient = settings
+                .getString(MySettingFragment.NIGHT_COEFFICIENT, getString(R.string.zero_zero));
+        sugarInBlood = settings
+                .getString(SugarInBloodFragment.SUGAR_IN_BLOOD, getString(R.string.zero_zero));
+        targetGlucose = settings
+                .getString(MySettingFragment.TARGET_GLUCOSE, getString(R.string.zero_zero));
+        topLine = Float.parseFloat(settings
+                .getString(MySettingFragment.TOP_LINE, getString(R.string.zero_zero)));
+        bottomLine = Float.parseFloat(settings
+                .getString(MySettingFragment.BOTTOM_LINE, getString(R.string.zero_zero)));
+        sensitivityCoefficient = settings
+                .getString(MySettingFragment.SENSITIVITY_COEFFICIENT, getString(R.string.zero_zero));
+        breadUnits = settings
+                .getString(BreadUnitsFragment.BREAD_UNITS, "0.0");
+    }
     @Override
     public void onAttach(@NonNull Context context){
         super.onAttach(context);

@@ -49,7 +49,9 @@
         <!-- group_coefficients-->
         <TextView
             android:id="@+id/tv_coefficients"
-            style="@style/text_view_h3"
+            style="@style/text_view_h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="35dp"
             android:text="@string/set"
             android:textColor="@color/white"
@@ -78,7 +80,8 @@
         <!-- group_coefficients -->
         <TextView
             android:id="@+id/textView8"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
+            android:layout_width="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/morning_coefficient"
@@ -87,7 +90,7 @@
 
         <TextView
             android:id="@+id/textView24"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="48dp"
             android:text="@string/morning_interval"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +107,7 @@
 
         <TextView
             android:id="@+id/textView11"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
             android:text="@string/day_coefficient"
@@ -113,7 +116,7 @@
 
         <TextView
             android:id="@+id/textView23"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="48dp"
             android:text="@string/day_interval"
             app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +134,7 @@
 
         <TextView
             android:id="@+id/textView17"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
             android:text="@string/evening_coefficient"
@@ -140,7 +143,7 @@
 
         <TextView
             android:id="@+id/textView22"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="48dp"
             android:text="@string/evening_interval"
             app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +160,7 @@
 
         <TextView
             android:id="@+id/textView18"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
             android:text="@string/night_coefficient"
@@ -166,7 +169,7 @@
 
         <TextView
             android:id="@+id/textView7"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="48dp"
             android:text="@string/night_interval"
             app:layout_constraintStart_toStartOf="parent"
@@ -211,7 +214,9 @@
 
         <TextView
             android:id="@+id/tv_compensation"
-            style="@style/text_view_h3"
+            style="@style/text_view_h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="35dp"
             android:text="@string/off"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
@@ -232,7 +237,7 @@
 
         <TextView
             android:id="@+id/textView25"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/compensation_insulin"
@@ -244,14 +249,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="74dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView25"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView25"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView25"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/textView26"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/target_glucose"
@@ -275,7 +278,7 @@
 
         <TextView
             android:id="@+id/textView27"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/bottom_line"
@@ -299,7 +302,7 @@
 
         <TextView
             android:id="@+id/textView28"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/top_line"
@@ -323,7 +326,7 @@
 
         <TextView
             android:id="@+id/textView29"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/sensitivity_coefficient"
@@ -391,7 +394,7 @@
 
         <TextView
             android:id="@+id/textView14"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -416,7 +419,7 @@
 
         <TextView
             android:id="@+id/tv_daily_dose_insulin_formula"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -464,7 +467,7 @@
 
         <TextView
             android:id="@+id/textView16"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="70dp"
@@ -489,7 +492,7 @@
 
         <TextView
             android:id="@+id/tv_hint_bread_units"
-            style="@style/text_view_h3"
+            style="@style/text_view_h3_white"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

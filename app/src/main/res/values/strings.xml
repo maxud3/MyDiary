@@ -134,7 +134,11 @@
     <string name="hint_bread_units">12</string>
     <string name="number_picker_point">.</string>
     <string name="for_food">На еду:</string>
-    <string name="formula_insulin_for_food">"На еду : %s(ХЕ) * %s(коефф.) = %s. "</string>
+    <string name="formula_insulin_for_food">На еду : %s(ХЕ) * %s(коефф.) = %s</string>
     <string name="total_insulin">Итог :</string>
+    <string name="formula_compensation">Компенсация : (%s - %s) / %s = %s</string>
+    <string name="no_compensation_required">Компенсация : не требуется</string>
+    <string name="compensation_no_sugar">Компенсация : не указана глюкоза</string>
+
 
 </resources>

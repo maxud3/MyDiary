@@ -36,6 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!--android:descendantFocusability="blocksDescendants" отключаем клавиатуру-->
     <NumberPicker
         android:id="@+id/np_bread_units"
         android:layout_width="80dp"
@@ -43,6 +44,7 @@
         android:fadingEdge="vertical"
         android:scrollbarSize="4dp"
         android:theme="@style/AppTheme.Picker"
+        android:descendantFocusability="blocksDescendants"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,5 +110,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.20" />
 </androidx.constraintlayout.widget.ConstraintLayout>

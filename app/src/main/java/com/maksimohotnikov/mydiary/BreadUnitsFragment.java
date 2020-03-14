@@ -52,7 +52,7 @@ public class BreadUnitsFragment extends Fragment {
         loadCarbohydratesAndBreadUnits();
 
         npBreadUnits.setMinValue(0);
-        npBreadUnits.setMaxValue(100);
+        npBreadUnits.setMaxValue(150);
         npBreadUnits.setValue(Integer.parseInt(carbohydrates));
         npBreadUnits.setOnValueChangedListener((picker, oldVal, newVal) -> {
             float breadUnits = newVal / 12.0f;

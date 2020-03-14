@@ -42,11 +42,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
+    <!--android:descendantFocusability="blocksDescendants" отключаем клавиатуру-->
     <NumberPicker
         android:id="@+id/number_picker1_long_insulin"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.Picker"
+        android:descendantFocusability="blocksDescendants"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
@@ -64,6 +66,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.20" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

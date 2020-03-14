@@ -24,22 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     static final String TAG = "myLogs";
     static final String APP_PREFERENCES = "my_settings";
-    //static final String MORNING_COEFFICIENT = "morningCoefficient";
-    //static final String DAY_COEFFICIENT = "dayCoefficient";
-    //static final String EVENING_COEFFICIENT = "eveningCoefficient";
-    //static final String NIGHT_COEFFICIENT = "nightCoefficient";
-    //static final String SWITCH_COMPENSATION_INSULIN = "switchCompensationInsulin";
-    //static final String TARGET_GLUCOSE = "targetGlucose";
-    //static final String BOTTOM_LINE = "bottomLine";
-    //static final String TOP_LINE = "topLine";
-    //static final String SENSITIVITY_COEFFICIENT = "sensitivityCoefficient";
-    //static final String DAILY_DOSE_INSULIN = "dailyDoseInsulin";
-    //static final String CARBOHYDRATES_IN_BREAD_UNIT = "carbohydratesInBreadUnit";
-
-
-
-
-    //SharedPreferences settings;
 
     Calendar date = Calendar.getInstance();
     @BindView (R.id.currentDateTime) TextView currentDateTime;
