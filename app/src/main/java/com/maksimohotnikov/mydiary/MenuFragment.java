@@ -19,15 +19,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-//import static com.maksimohotnikov.mydiary.MainActivity.*;
-
-import static com.maksimohotnikov.mydiary.SugarInBloodFragment.*;
+import static com.maksimohotnikov.mydiary.SettingConstants.APP_PREFERENCES;
+import static com.maksimohotnikov.mydiary.SettingConstants.BREAD_UNITS;
 
 
 public class MenuFragment extends Fragment {
 
-    static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.MenuFragment";
-    static final String BREAD_UNITS = "breadUnits";
+    //static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.MenuFragment";
     private OpenInsulinFragment mListener;
     @BindView(R.id.btn_minus_bread_units)
     Button btnMinusBreadUnits;
@@ -126,7 +124,7 @@ public class MenuFragment extends Fragment {
             breadUnits = getString(R.string.zero_zero);
         }
         SharedPreferences.Editor prefEditor = getActivity()
-                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE)
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
                 .edit();
         prefEditor.putString(BREAD_UNITS, breadUnits);
         prefEditor.apply();

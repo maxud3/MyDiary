@@ -2,7 +2,6 @@ package com.maksimohotnikov.mydiary;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.text.format.DateUtils;
 import android.app.DatePickerDialog;
 import android.util.Log;
@@ -10,11 +9,9 @@ import android.view.Menu;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-//import android.widget.DatePicker;
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 import java.util.Calendar;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -23,7 +20,7 @@ import butterknife.Unbinder;
 public class MainActivity extends AppCompatActivity {
 
     static final String TAG = "myLogs";
-    static final String APP_PREFERENCES = "my_settings";
+
 
     Calendar date = Calendar.getInstance();
     @BindView (R.id.currentDateTime) TextView currentDateTime;
@@ -37,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
-
-        //settings = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.diary_actionbar_title);
@@ -106,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     @Override
     protected void onStart() {
         super.onStart();

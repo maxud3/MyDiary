@@ -19,13 +19,12 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.maksimohotnikov.mydiary.SettingConstants.*;
 
 
 public class SugarInBloodFragment extends Fragment {
 
     static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.SugarInBloodFragment";
-    static final String SUGAR_IN_BLOOD = "sugarInBlood";
-    static final String SWITCH_NO_MEASURING = "switchNoMeasuring";
     private SharedPreferences settings;
     @BindView(R.id.tv_warning)
     TextView tvWarning;
@@ -45,7 +44,7 @@ public class SugarInBloodFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         settings = getActivity()
-                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
     }
 

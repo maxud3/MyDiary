@@ -14,15 +14,17 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.maksimohotnikov.mydiary.SettingConstants.*;
+
 
 public class LongInsulinFragment extends Fragment {
 
     final static String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.LongInsulinFragment";
-    private final String LONG_INSULIN_DOSE = "longInsulinDose";
+
     private SharedPreferences settings;
     private OnLongInsulinFragmentListener mListener;
-    @BindView(R.id.number_picker1_long_insulin)
-    NumberPicker np1LongInsulin;
+    @BindView(R.id.number_picker_long_insulin)
+    NumberPicker npLongInsulin;
     private String longInsulinDose;
     private Unbinder unbinder;
 
@@ -31,7 +33,7 @@ public class LongInsulinFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         settings = getActivity()
-                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setLongInsulinDose();
     }
 
@@ -41,15 +43,15 @@ public class LongInsulinFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_long_insulin, container, false);
         unbinder =  ButterKnife.bind(this, view);
 
-        np1LongInsulin.setMinValue(0);
-        np1LongInsulin.setMaxValue(50);
-        np1LongInsulin.setValue(Integer.parseInt(longInsulinDose));
+        npLongInsulin.setMinValue(0);
+        npLongInsulin.setMaxValue(50);
+        npLongInsulin.setValue(Integer.parseInt(longInsulinDose));
         return view;
     }
 
     //Сохраняем дозу длинного инсулина
     private void saveLongInsulinDose(){
-            String longInsulinDose = String.valueOf(np1LongInsulin.getValue());
+            String longInsulinDose = String.valueOf(npLongInsulin.getValue());
             SharedPreferences.Editor prefEditor = settings.edit();
             prefEditor.putString(LONG_INSULIN_DOSE, longInsulinDose);
             prefEditor.apply();

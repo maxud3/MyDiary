@@ -24,6 +24,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.maksimohotnikov.mydiary.SettingConstants.*;
+
+
 public class ShortInsulinFragment extends Fragment {
 
     static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.ShortInsulinFragment";
@@ -64,14 +67,13 @@ public class ShortInsulinFragment extends Fragment {
     private boolean switchCompensationInsulin;
     private boolean switchNoMeasuringState;
     private boolean visibleGroup = false;
-    //Group group;
 
     @SuppressWarnings("ConstantConditions")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         settings = getActivity()
-                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         Log.d(MainActivity.TAG, "onCreate: ShortInsulinFragment");
     }
 
@@ -106,7 +108,6 @@ public class ShortInsulinFragment extends Fragment {
         int i1 = fractionPicker.getValue();
         String totalShortInsulinDose = i +"." + i1;
         SharedPreferences.Editor prefEditor =settings.edit();
-        final String SHORT_INSULIN_DOSE = "shortInsulinDose";
         prefEditor.putString(SHORT_INSULIN_DOSE, totalShortInsulinDose);
         prefEditor.apply();
     }
@@ -248,32 +249,32 @@ public class ShortInsulinFragment extends Fragment {
     //Получаем boolean сохраненные параметры
     private void getSavedBooleanParameters(){
         switchNoMeasuringState = settings
-                .getBoolean(SugarInBloodFragment.SWITCH_NO_MEASURING, false);
+                .getBoolean(SWITCH_NO_MEASURING, false);
         switchCompensationInsulin = settings
-                .getBoolean(MySettingFragment.SWITCH_COMPENSATION_INSULIN, false);
+                .getBoolean(SWITCH_COMPENSATION_INSULIN, false);
     }
     //Получаем строковые сохраненные параметры
     private void getSavedStringsParameters(){
         morningCoefficient = settings
-                .getString(MySettingFragment.MORNING_COEFFICIENT, getString(R.string.zero_zero));
+                .getString(MORNING_COEFFICIENT, getString(R.string.zero_zero));
         dayCoefficient = settings
-                .getString(MySettingFragment.DAY_COEFFICIENT, getString(R.string.zero_zero));
+                .getString(DAY_COEFFICIENT, getString(R.string.zero_zero));
         eveningCoefficient = settings
-                .getString(MySettingFragment.EVENING_COEFFICIENT, getString(R.string.zero_zero));
+                .getString(EVENING_COEFFICIENT, getString(R.string.zero_zero));
         nightCoefficient = settings
-                .getString(MySettingFragment.NIGHT_COEFFICIENT, getString(R.string.zero_zero));
+                .getString(NIGHT_COEFFICIENT, getString(R.string.zero_zero));
         sugarInBlood = settings
-                .getString(SugarInBloodFragment.SUGAR_IN_BLOOD, getString(R.string.zero_zero));
+                .getString(SUGAR_IN_BLOOD, getString(R.string.zero_zero));
         targetGlucose = settings
-                .getString(MySettingFragment.TARGET_GLUCOSE, getString(R.string.zero_zero));
+                .getString(TARGET_GLUCOSE, getString(R.string.zero_zero));
         topLine = Float.parseFloat(settings
-                .getString(MySettingFragment.TOP_LINE, getString(R.string.zero_zero)));
+                .getString(TOP_LINE, getString(R.string.zero_zero)));
         bottomLine = Float.parseFloat(settings
-                .getString(MySettingFragment.BOTTOM_LINE, getString(R.string.zero_zero)));
+                .getString(BOTTOM_LINE, getString(R.string.zero_zero)));
         sensitivityCoefficient = settings
-                .getString(MySettingFragment.SENSITIVITY_COEFFICIENT, getString(R.string.zero_zero));
+                .getString(SENSITIVITY_COEFFICIENT, getString(R.string.zero_zero));
         breadUnits = settings
-                .getString(BreadUnitsFragment.BREAD_UNITS, "0.0");
+                .getString(BREAD_UNITS, "0.0");
     }
     @Override
     public void onAttach(@NonNull Context context){

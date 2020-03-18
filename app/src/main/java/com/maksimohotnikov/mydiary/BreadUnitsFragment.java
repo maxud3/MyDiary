@@ -15,11 +15,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.maksimohotnikov.mydiary.SettingConstants.*;
+
 public class BreadUnitsFragment extends Fragment {
 
     static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.BreadUnitsFragment";
-    private final String CARBOHYDRATES = "carbohydrates";
-    static final String BREAD_UNITS = "breadUnits";
+
     private SharedPreferences settings;
     private static final int DIGITS = 1;
     private OnBreadUnitsFragmentListener mListener;
@@ -40,7 +41,7 @@ public class BreadUnitsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         settings = getActivity()
-                .getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
     }
 
     @Override
