@@ -66,7 +66,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/ukrainian_free_set</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
     <style name="text_view_h3_white">
         <item name="android:layout_width">wrap_content</item>

@@ -28,19 +28,20 @@ import static com.maksimohotnikov.mydiary.MainActivity.TAG;
 
 public class SettingsFragment extends Fragment {
 
-    static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.SettingsFragment";
+    //static final String TAG_FRAGMENT = "com.maksimohotnikov.mydiary.SettingsFragment";
     private OnFragmentInteractionListener mListener;
     @BindView(R.id.tv_coefficients)
     TextView tvCoefficients;
     @BindView(R.id.tv_compensation)
     TextView tvCompensation;
     @BindView(R.id.arrow_down_3)
-    ImageView ivArrowDown;
-    @BindView(R.id.image_view_arrow_up)
     ImageView ivArrowUp;
     @BindView(R.id.tv_daily_dose_insulin_formula)
     TextView tvDailyDoseInsulinFormula;
-    private Unbinder unbinder;
+    @BindView(R.id.arrow_down_3)
+    ImageView ivArrowDown;
+    @BindView(R.id.image_view_arrow_up)
+    Unbinder unbinder;
     private boolean showHint = true;
 
     public SettingsFragment() {

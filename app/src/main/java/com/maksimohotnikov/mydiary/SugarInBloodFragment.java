@@ -35,7 +35,7 @@ public class SugarInBloodFragment extends Fragment {
     @BindView(R.id.switch_no_measuring)
     Switch switchNoMeasuring;
     private Unbinder unbinder;
-    private String s;
+    private String s = "0";
     private String s1;
     private String s2;
     private String sugarInBlood;

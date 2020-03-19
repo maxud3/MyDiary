@@ -58,7 +58,7 @@
         android:layout_marginTop="24dp"
         android:text="@string/long_insulin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView42" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalInsulin" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -79,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView42" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalInsulin" />
 
     <TextView
         android:id="@+id/textView38"
@@ -162,7 +162,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="text_view_formula_insulin_for_food,formula_compensation,textView42"
+        app:constraint_referenced_ids="text_view_formula_insulin_for_food,formula_compensation,tvTotalInsulin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -184,7 +184,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_formula_insulin_for_food" />
 
     <TextView
-        android:id="@+id/textView42"
+        android:id="@+id/tvTotalInsulin"
         style="@style/text_view_h3_black"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

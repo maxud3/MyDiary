@@ -46,6 +46,9 @@ public class ShortInsulinFragment extends Fragment {
     TextView tvFormulaInsulinForFood;
     @BindView(R.id.formula_compensation)
     TextView tvFormulaCompensation;
+    @BindView(R.id.tvTotalInsulin)
+    TextView tvTotalInsulin;
+
 
     private Unbinder unbinder;
     private float currentCoefficient;
@@ -53,7 +56,7 @@ public class ShortInsulinFragment extends Fragment {
     private float compensationInsulin;
     private float topLine;
     private float bottomLine;
-    private float insulinEat;
+    private float insulinForFood;
     private String valueIntegerPicker;
     private String valueFractionPicker;
     private String breadUnits;
@@ -90,7 +93,9 @@ public class ShortInsulinFragment extends Fragment {
         calculateCompensationInsulin();
         calculateTotalInsulin();
         setTotalInsulinNumberPicker(totalInsulin);
+        setFormulaInsulinForFood();
         setFormulaCompensation();
+        setFormulaTotalInsulin();
         integerPicker.setMaxValue(9);
         integerPicker.setMinValue(0);
         integerPicker.setValue(Integer.parseInt(valueIntegerPicker));
@@ -104,15 +109,15 @@ public class ShortInsulinFragment extends Fragment {
 
     //Сохраняем дозу короткого инсулина
     private void saveShortInsulinDose(){
-        int i = integerPicker.getValue();
         int i1 = fractionPicker.getValue();
+        int i = integerPicker.getValue();
         String totalShortInsulinDose = i +"." + i1;
         SharedPreferences.Editor prefEditor =settings.edit();
         prefEditor.putString(SHORT_INSULIN_DOSE, totalShortInsulinDose);
         prefEditor.apply();
     }
-    //устанавливаем итоговую дозу инсулина
     private void setTotalInsulinNumberPicker(float totalInsulin){
+        //устанавливаем итоговую дозу инсулина
         if (totalInsulin < 0.0f){
             valueIntegerPicker = getString(R.string.zero);
             valueFractionPicker = getString(R.string.zero);
@@ -137,33 +142,39 @@ public class ShortInsulinFragment extends Fragment {
     //вычисляем итоговую дозу инсулина
     private void calculateTotalInsulin(){
         if (switchNoMeasuringState){
-            totalInsulin = insulinEat;
+            totalInsulin = insulinForFood;
         }else {
-            totalInsulin = insulinEat + compensationInsulin;
+            totalInsulin = insulinForFood + compensationInsulin;
         }
     }
 
+    private void setFormulaTotalInsulin(){
+        String s = String.valueOf(roundUp(insulinForFood, 1));
+        String s1 = String.valueOf(roundUp(compensationInsulin, 1));
+        String s2 = String.valueOf(roundUp(totalInsulin, 1));
+        tvTotalInsulin.setText(getString(R.string.total_insulin, s, s1, s2));
+    }
     //Расчитываем инсулин на еду по коэффициенту на текущее время
     private void calculateInsulinEat (float currentCoefficient){
         float defaultCoefficient = Float.parseFloat(getString(R.string.default_coefficient));
         if (currentCoefficient > defaultCoefficient) {
             float f = Float.parseFloat(breadUnits);
-            insulinEat =  f * currentCoefficient;
-            setFormulaInsulinEat();
+            insulinForFood =  f * currentCoefficient;
+            setFormulaInsulinForFood();
         } else {
             Toast toast = Toast.makeText(
                     getActivity(), R.string.dose_not_calculated, Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-            insulinEat =  defaultCoefficient;
+            insulinForFood =  defaultCoefficient;
         }
     }
-    private void setFormulaInsulinEat(){
+   /* private void setFormulaInsulinForFood(){
         String s = String.valueOf(currentCoefficient);
-        String s1 = String.valueOf(roundUp(insulinEat, DIGITS));
+        String s1 = String.valueOf(roundUp(insulinForFood, DIGITS));
         tvFormulaInsulinForFood
                 .setText(getString(R.string.formula_insulin_for_food, breadUnits, s, s1));
-    }
+    }*/
     //Вычисляем компенсацию
     private void calculateCompensationInsulin(){
         float sgrInBlood = Float.parseFloat(sugarInBlood);
@@ -186,7 +197,7 @@ public class ShortInsulinFragment extends Fragment {
         }else if (sgrInBlood >= bottomLine && sgrInBlood <= topLine){
             tvFormulaCompensation.setText(R.string.no_compensation_required);
         }else {
-            String s = String.valueOf(roundUp(compensationInsulin, DIGITS));
+            String s = String.valueOf(roundUp(compensationInsulin, 1));
             tvFormulaCompensation.setText(getString(R.string
                     .formula_compensation, sugarInBlood, targetGlucose, sensitivityCoefficient, s));
         }
@@ -218,6 +229,13 @@ public class ShortInsulinFragment extends Fragment {
         }
     }
 
+    private void setFormulaInsulinForFood(){
+        String currCoefficient = String.valueOf(currentCoefficient);
+        String insForFood = String.valueOf(roundUp(insulinForFood, 1));
+        tvFormulaInsulinForFood
+                .setText(getString(R.string
+                        .formula_insulin_for_food, breadUnits, currCoefficient, insForFood));
+    }
     @OnClick({R.id.view_click_long_insulin, R.id.btn_further, R.id.image_view_info})
     void onClick(View view){
         switch (view.getId()){
@@ -225,6 +243,7 @@ public class ShortInsulinFragment extends Fragment {
                 if (!visibleGroup){
                     visibleGroup = true;
                     groupFormulaInsulinForFood.setVisibility(View.VISIBLE);
+                    //setFormulaInsulinForFood();
                 }else {
                     visibleGroup = false;
                     groupFormulaInsulinForFood.setVisibility(View.GONE);
