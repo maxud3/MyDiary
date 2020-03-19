@@ -318,7 +318,6 @@ public class MySettingFragment extends Fragment {
     public void onDestroy(){
         super.onDestroy();
         unbinder.unbind();
-        //Log.d(TAG, "SettingsFragment. onDestroy");
     }
     @Override
     public void onDetach() {
