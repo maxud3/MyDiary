@@ -12,14 +12,13 @@
         layout="@layout/toolbar" />
 
     <TextView
-        android:id="@+id/currentDateTime"
+        android:id="@+id/current_date"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="@android:color/background_light"
         android:clickable="true"
         android:focusable="true"
-        android:gravity="center_vertical"
-        android:textAlignment="center"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

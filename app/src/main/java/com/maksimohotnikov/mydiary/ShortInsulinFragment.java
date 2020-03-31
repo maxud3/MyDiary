@@ -169,12 +169,6 @@ public class ShortInsulinFragment extends Fragment {
             insulinForFood =  defaultCoefficient;
         }
     }
-   /* private void setFormulaInsulinForFood(){
-        String s = String.valueOf(currentCoefficient);
-        String s1 = String.valueOf(roundUp(insulinForFood, DIGITS));
-        tvFormulaInsulinForFood
-                .setText(getString(R.string.formula_insulin_for_food, breadUnits, s, s1));
-    }*/
     //Вычисляем компенсацию
     private void calculateCompensationInsulin(){
         float sgrInBlood = Float.parseFloat(sugarInBlood);
@@ -184,6 +178,8 @@ public class ShortInsulinFragment extends Fragment {
             compensationInsulin =  0.0f;
         }else if (sgrInBlood >= bottomLine && sgrInBlood <= topLine){
             compensationInsulin =  0.0f;
+        } else if (switchNoMeasuringState){
+          compensationInsulin = 0.0f;
         } else {
             compensationInsulin =  (sgrInBlood - trgGlucose) /sensCoefficient;
         }

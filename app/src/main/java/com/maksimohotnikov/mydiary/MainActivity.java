@@ -21,10 +21,11 @@ public class MainActivity extends AppCompatActivity {
 
     static final String TAG = "myLogs";
 
-
     Calendar date = Calendar.getInstance();
-    @BindView (R.id.currentDateTime) TextView currentDateTime;
-    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView (R.id.current_date)
+    TextView currentDate;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private Unbinder unbinder;
 
     @SuppressWarnings("ConstantConditions")
@@ -43,15 +44,17 @@ public class MainActivity extends AppCompatActivity {
 
     // отображаем диалоговое окно для выбора даты
     public void setData(){
+
         new DatePickerDialog(MainActivity.this, d,
                 date.get(Calendar.YEAR),
                 date.get(Calendar.MONTH),
                 date.get(Calendar.DAY_OF_MONTH))
                 .show();
+
     }
     // установка начальных даты и времени
     private void setInitialDateTime(){
-        currentDateTime.setText(DateUtils.formatDateTime(this,
+        currentDate.setText(DateUtils.formatDateTime(this,
                 date.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
     }
@@ -82,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick({R.id.btnAddRecord, R.id.btnSettings, R.id.currentDateTime})
+    @OnClick({R.id.btnAddRecord, R.id.btnSettings, R.id.current_date})
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.currentDateTime:
+            case R.id.current_date:
                 Log.d(TAG, "currentDateTime");
                 setData();
                 break;

@@ -28,16 +28,16 @@ public class SugarInBloodFragment extends Fragment {
     private SharedPreferences settings;
     @BindView(R.id.tv_warning)
     TextView tvWarning;
-    @BindView(R.id.number_picker1_sugar)
-    NumberPicker numberPicker1SugarInBlood;
-    @BindView(R.id.number_picker2_sugar)
-    NumberPicker numberPicker2SugarInBlood;
+    @BindView(R.id.integer_number_picker)
+    NumberPicker integerNumberPicker;
+    @BindView(R.id.decimal_number_picker)
+    NumberPicker decimalNumberPicker;
     @BindView(R.id.switch_no_measuring)
     Switch switchNoMeasuring;
     private Unbinder unbinder;
-    private String s = "0";
-    private String s1;
-    private String s2;
+    private String s;
+    private String integerValue;
+    private String decimalValue;
     private String sugarInBlood;
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -54,20 +54,28 @@ public class SugarInBloodFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sugar_in_blood, container, false);
         unbinder = ButterKnife.bind(this, view);
         loadSugarInBlood();
-        numberPicker1SugarInBlood.setOnValueChangedListener((picker, oldVal, newVal) -> {
+        integerNumberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
             s =  String.valueOf(newVal);
-            showWarning(s);
+            String s1 = s + "." + decimalValue;
+            showWarning(s1);
         });
-        numberPicker2SugarInBlood.setOnValueChangedListener((picker, oldVal, newVal) -> {
-            sugarInBlood = s + "." + newVal;
-            showWarning(sugarInBlood);
+        decimalNumberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
+            decimalValue = String.valueOf(newVal);
+            if (s == null){
+                s = integerValue;
+            }else {
+                sugarInBlood = s + "." + newVal;
+                //sugarInBlood = integerValue + "." + newVal;
+                showWarning(sugarInBlood);
+            }
+
         });
-        numberPicker1SugarInBlood.setMinValue(0);
-        numberPicker1SugarInBlood.setMaxValue(40);
-        numberPicker1SugarInBlood.setValue(Integer.parseInt(s1));
-        numberPicker2SugarInBlood.setMinValue(0);
-        numberPicker2SugarInBlood.setMaxValue(9);
-        numberPicker2SugarInBlood.setValue(Integer.parseInt(s2));
+        integerNumberPicker.setMinValue(0);
+        integerNumberPicker.setMaxValue(40);
+        integerNumberPicker.setValue(Integer.parseInt(integerValue));
+        decimalNumberPicker.setMinValue(0);
+        decimalNumberPicker.setMaxValue(9);
+        decimalNumberPicker.setValue(Integer.parseInt(decimalValue));
 
         loadSugarInBlood();
 
@@ -78,18 +86,18 @@ public class SugarInBloodFragment extends Fragment {
     @OnCheckedChanged(R.id.switch_no_measuring)
     void checkedSwitchNoMeasuring(boolean checked){
         if (checked){
-            numberPicker1SugarInBlood.setEnabled(false);
-            numberPicker2SugarInBlood.setEnabled(false);
+            integerNumberPicker.setEnabled(false);
+            decimalNumberPicker.setEnabled(false);
         }else {
-            numberPicker1SugarInBlood.setEnabled(true);
-            numberPicker2SugarInBlood.setEnabled(true);
+            integerNumberPicker.setEnabled(true);
+            decimalNumberPicker.setEnabled(true);
         }
     }
 
     //Сохраняем значение сахара в крови
     private void saveSugarInBlood(){
-        int i = numberPicker1SugarInBlood.getValue();
-        int i1 = numberPicker2SugarInBlood.getValue();
+        int i = integerNumberPicker.getValue();
+        int i1 = decimalNumberPicker.getValue();
         if (switchNoMeasuring.isChecked()){
             sugarInBlood = getString(R.string.zero_zero);
         }else {
@@ -101,13 +109,13 @@ public class SugarInBloodFragment extends Fragment {
         prefEditor.apply();
     }
 
-
+//устанавливаем предыдущее сохраненное значение сахара в крови
     private void loadSugarInBlood(){
         String s = settings.getString(SUGAR_IN_BLOOD, "0.0");
         String[] arrSplit = s.split("\\.");
         for (int i = 0; i < arrSplit.length; i++){
-            s1 = arrSplit[0];
-            s2 = arrSplit[1];
+            integerValue = arrSplit[0];
+            decimalValue = arrSplit[1];
         }
     }
     @OnClick(R.id.btn_further)

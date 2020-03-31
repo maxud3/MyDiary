@@ -139,6 +139,8 @@
     <string name="formula_compensation">Компенсация : (%s - %s) / %s = %s</string>
     <string name="no_compensation_required">Компенсация : не требуется</string>
     <string name="compensation_no_sugar">Компенсация : не указана глюкоза</string>
+    <string name="total_record">Итог</string>
+    <string name="current_date_time">%i %i %i</string>
 
 
 </resources>
