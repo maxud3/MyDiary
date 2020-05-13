@@ -50,11 +50,11 @@ public class BreadUnitsFragment extends Fragment {
 
         View view =  inflater.inflate(R.layout.fragment_bread_units, container, false);
         unbinder = ButterKnife.bind(this, view);
-        loadCarbohydratesAndBreadUnits();
+        //loadCarbohydratesAndBreadUnits();
 
         npBreadUnits.setMinValue(0);
         npBreadUnits.setMaxValue(150);
-        npBreadUnits.setValue(Integer.parseInt(carbohydrates));
+        npBreadUnits.setValue(Integer.parseInt(getString(R.string.zero)));
         npBreadUnits.setOnValueChangedListener((picker, oldVal, newVal) -> {
             float breadUnits = newVal / 12.0f;
             tvTotalCarbohydrates.setText(String.valueOf(newVal));

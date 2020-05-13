@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_record">
+        <item>пробуждение</item>
+        <item>до завтрака</item>
+        <item>после завтрака</item>
+        <item>до второго завтрака</item>
+        <item>после второго завтрака</item>
+        <item>до обеда</item>
+        <item>после обеда</item>
+        <item>до полдника</item>
+        <item>после полдника</item>
+        <item>до ужина</item>
+        <item>после ужина</item>
+        <item>до второго ужина</item>
+        <item>после второго ужина</item>
+        <item>перед сно</item>
+        <item>ночь</item>
+        <item>контроль</item>
+        <item>до тренировки</item>
+        <item>после тренировки</item>
+        <item>не указан</item>
+    </string-array>
+</resources>

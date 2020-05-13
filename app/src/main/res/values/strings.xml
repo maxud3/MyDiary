@@ -141,6 +141,11 @@
     <string name="compensation_no_sugar">Компенсация : не указана глюкоза</string>
     <string name="total_record">Итог</string>
     <string name="current_date_time">%i %i %i</string>
+    <string name="type_record">Тип записи</string>
+    <string name="unspecified">не указан</string>
+    <string name="glucose_level">Уровень глюкозы</string>
+    <string name="comment">Комментарий:</string>
+    <string name="sugar">Сахар</string>
 
 
 </resources>

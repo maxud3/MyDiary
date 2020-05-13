@@ -12,16 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="LockedOrientationActivity">
+        <activity android:name=".TotalRecordActivity"></activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/settings">
-
-        </activity>
+            android:label="@string/settings"></activity>
         <activity
             android:name=".RecordActivity"
             android:label="@string/records"
             android:screenOrientation="portrait">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

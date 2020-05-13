@@ -25,7 +25,7 @@ public class LongInsulinFragment extends Fragment {
     private OnLongInsulinFragmentListener mListener;
     @BindView(R.id.number_picker_long_insulin)
     NumberPicker npLongInsulin;
-    private String longInsulinDose;
+    //private String longInsulinDose;
     private Unbinder unbinder;
 
     @SuppressWarnings("ConstantConditions")
@@ -34,7 +34,7 @@ public class LongInsulinFragment extends Fragment {
         super.onCreate(savedInstanceState);
         settings = getActivity()
                 .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        setLongInsulinDose();
+        //setLongInsulinDose();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class LongInsulinFragment extends Fragment {
 
         npLongInsulin.setMinValue(0);
         npLongInsulin.setMaxValue(50);
-        npLongInsulin.setValue(Integer.parseInt(longInsulinDose));
+        npLongInsulin.setValue(0);
         return view;
     }
 
@@ -58,9 +58,9 @@ public class LongInsulinFragment extends Fragment {
 
     }
     //устанавливаем предыдущую дозу длинного инсулина
-    private void setLongInsulinDose(){
+    /*private void setLongInsulinDose(){
         longInsulinDose =  settings.getString(LONG_INSULIN_DOSE, "0");
-    }
+    }*/
     @OnClick(R.id.btn_further)
     void onClick(){
                 mListener.openTotalRecordFragment();

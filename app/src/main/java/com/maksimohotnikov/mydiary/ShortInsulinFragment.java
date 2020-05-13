@@ -19,6 +19,8 @@ import net.danlew.android.joda.JodaTimeAndroid;
 import org.joda.time.LocalTime;
 import java.math.BigDecimal;
 import androidx.constraintlayout.widget.Group;
+
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,7 +50,8 @@ public class ShortInsulinFragment extends Fragment {
     TextView tvFormulaCompensation;
     @BindView(R.id.tvTotalInsulin)
     TextView tvTotalInsulin;
-
+    @BindString(R.string.zero_zero)
+    String zeroZero;
 
     private Unbinder unbinder;
     private float currentCoefficient;
@@ -270,26 +273,16 @@ public class ShortInsulinFragment extends Fragment {
     }
     //Получаем строковые сохраненные параметры
     private void getSavedStringsParameters(){
-        morningCoefficient = settings
-                .getString(MORNING_COEFFICIENT, getString(R.string.zero_zero));
-        dayCoefficient = settings
-                .getString(DAY_COEFFICIENT, getString(R.string.zero_zero));
-        eveningCoefficient = settings
-                .getString(EVENING_COEFFICIENT, getString(R.string.zero_zero));
-        nightCoefficient = settings
-                .getString(NIGHT_COEFFICIENT, getString(R.string.zero_zero));
-        sugarInBlood = settings
-                .getString(SUGAR_IN_BLOOD, getString(R.string.zero_zero));
-        targetGlucose = settings
-                .getString(TARGET_GLUCOSE, getString(R.string.zero_zero));
-        topLine = Float.parseFloat(settings
-                .getString(TOP_LINE, getString(R.string.zero_zero)));
-        bottomLine = Float.parseFloat(settings
-                .getString(BOTTOM_LINE, getString(R.string.zero_zero)));
-        sensitivityCoefficient = settings
-                .getString(SENSITIVITY_COEFFICIENT, getString(R.string.zero_zero));
-        breadUnits = settings
-                .getString(BREAD_UNITS, "0.0");
+        morningCoefficient = settings.getString(MORNING_COEFFICIENT, zeroZero);
+        dayCoefficient = settings.getString(DAY_COEFFICIENT, zeroZero);
+        eveningCoefficient = settings.getString(EVENING_COEFFICIENT, zeroZero);
+        nightCoefficient = settings.getString(NIGHT_COEFFICIENT, zeroZero);
+        sugarInBlood = settings.getString(SUGAR_IN_BLOOD, zeroZero);
+        targetGlucose = settings.getString(TARGET_GLUCOSE, zeroZero);
+        topLine = Float.parseFloat(settings.getString(TOP_LINE, zeroZero));
+        bottomLine = Float.parseFloat(settings.getString(BOTTOM_LINE, zeroZero));
+        sensitivityCoefficient = settings.getString(SENSITIVITY_COEFFICIENT, zeroZero);
+        breadUnits = settings.getString(BREAD_UNITS, zeroZero);
     }
     @Override
     public void onAttach(@NonNull Context context){

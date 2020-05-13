@@ -53,6 +53,7 @@ public class SugarInBloodFragment extends Fragment {
                              @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_sugar_in_blood, container, false);
         unbinder = ButterKnife.bind(this, view);
+        switchNoMeasuring.isChecked();
         loadSugarInBlood();
         integerNumberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
             s =  String.valueOf(newVal);
@@ -70,6 +71,8 @@ public class SugarInBloodFragment extends Fragment {
             }
 
         });
+        integerNumberPicker.setEnabled(false);
+        decimalNumberPicker.setEnabled(false);
         integerNumberPicker.setMinValue(0);
         integerNumberPicker.setMaxValue(40);
         integerNumberPicker.setValue(Integer.parseInt(integerValue));
@@ -101,7 +104,7 @@ public class SugarInBloodFragment extends Fragment {
         if (switchNoMeasuring.isChecked()){
             sugarInBlood = getString(R.string.zero_zero);
         }else {
-            sugarInBlood = i + "." +i1;
+            sugarInBlood = i + "." + i1;
         }
         SharedPreferences.Editor prefEditor = settings.edit();
         prefEditor.putString(SUGAR_IN_BLOOD, sugarInBlood);

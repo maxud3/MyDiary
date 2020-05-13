@@ -5,6 +5,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -117,6 +119,8 @@ public class RecordActivity extends AppCompatActivity implements SugarInBloodFra
 
     @Override
     public void openTotalRecordFragment() {
+        /*Intent intent = new Intent(RecordActivity.this, TotalRecordActivity.class);
+        startActivity(intent);*/
         fm = getSupportFragmentManager();
 
         Fragment fragment = fm.findFragmentById(R.id.container);
